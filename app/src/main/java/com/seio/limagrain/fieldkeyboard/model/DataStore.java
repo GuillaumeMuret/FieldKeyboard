@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class DataStore {
 
-    // Tag use for the debug
+    // Tag use for the debug.
     public static final String TAG = "DEBUG_TAG";
 
     // The time of the animation
