@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:scrollbars="vertical">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <!--  -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <ImageView
+                        android:id="@+id/btSaveLanguage"
+                        android:layout_width="@dimen/keyboard_app_bar_icon_size_with_padding"
+                        android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
+                        android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
+                        android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
+                        android:background="@drawable/selector_attach_keyboard"
+                        android:padding="@dimen/keyboard_app_bar_button_padding"
+                        android:src="@drawable/ic_save" />
+
+
+                </LinearLayout>
+
+                <!-- Language Layout -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/llLanguageLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btAddLanguage"
+                        android:layout_width="@dimen/keyboard_app_bar_icon_size_with_padding"
+                        android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
+                        android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
+                        android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
+                        android:background="@drawable/selector_attach_keyboard"
+                        android:padding="@dimen/keyboard_app_bar_button_padding"
+                        android:src="@drawable/ic_add" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+</android.support.v4.widget.NestedScrollView>

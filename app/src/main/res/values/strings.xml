@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">Field Keyboard</string>
+    <string name="simple_ime">Field Keyboard</string>
+    <string name="subtype_company">Limagrain\'s Keyboard Europe</string>
+
+    <!-- HOME ACTIVITY -->
+    <string name="main_activity_configuration">Configuration</string>
+    <string name="main_activity_word_to_add">Word to add : </string>
+    <string name="main_activity_word_to_add_hint">Tap a word</string>
+    <string name="main_activity_text_size">Text size : </string>
+    <string name="main_activity_text_size_hint">Tap text size</string>
+    <string name="main_activity_nb_line">Line number : </string>
+    <string name="main_activity_nb_line_hint">Tap line number</string>
+    <string name="main_activity_nb_row">Row number : </string>
+    <string name="main_activity_nb_row_hint">Tap row number</string>
+    <string name="main_activity_keyboard_height">Keyboard height : </string>
+    <string name="main_activity_keyboard_height_hint">Tap keyboard height</string>
+
+    <string name="main_activity_button_launch_configuration">Launch configuration</string>
+    <string name="main_activity_button_add_word">Add the word</string>
+    <string name="main_activity_button_add_parameter_key">Add fixed key</string>
+    <string name="main_activity_button_edit_language_mode">Edit language mode</string>
+    <string name="main_activity_button_delete_all_keys">Delete all keys</string>
+    <string name="main_activity_button_import_word">Import word</string>
+    <string name="main_activity_button_choose_keyboard">Choose keyboard</string>
+    <string name="main_activity_button_import_keyboard">Import keyboard</string>
+
+    <string name="main_activity_choose_word_file">Select a file with word you want to import</string>
+    <string name="main_activity_choose_keyboard_file">Select json or csv file with keyboard configuration</string>
+
+    <string name="main_activity_dialog_overwrite_current_configuration_title">Overwrite current keyboard configuration ?</string>
+    <string name="main_activity_dialog_overwrite_current_configuration_content">This action will overwrite the current keyboard configuration. Continue ?</string>
+    <string name="main_activity_dialog_remove_all_keys_title">Remove all keys</string>
+    <string name="main_activity_dialog_remove_all_keys_content">Are you sure you want to delete every keys ?</string>
+    <string name="dialog_yes">Yes</string>
+
+
+    <string name="main_activity_dialog_parameter_key_title">Create fixed key</string>
+    <string name="main_activity_dialog_choose_icon">Choose an icon</string>
+    <string name="main_activity_dialog_word_to_add_on_button">Key word :</string>
+    <string name="main_activity_dialog_action">Key action</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="main_activity_dialog_finish">Finish</string>
+    <string name="main_activity_dialog_yes">Yes</string>
+
+    <string name="info_message_word_added">Word added to the keyboard</string>
+    <string name="info_message_param_key_added">Param key added to the keyboard</string>
+    <string name="info_message_configuration_success">Configuration success</string>
+
+    <string name="error_cannot_remove_default_language">You cannot remove default language</string>
+    <string name="error_android_version_too_old">Android version too old…</string>
+    <string name="error_wrong_parameter_key">Wrong parameters…</string>
+    <string name="error_message_empty_field">You have to fill the empty field…</string>
+    <string name="error_message_empty_field_add_word">You cannot add empty word…</string>
+    <string name="error_message_not_integer">A field is not an integer…</string>
+
+    <!-- KEYBOARD -->
+    <!-- Action bar -->
+    <string name="keyboard_action_bar_return_android_keyboard">Android Keyboard</string>
+
+    <!-- Color picker widget -->
+    <string name="color_picker_widget_background_title">Choose background color</string>
+    <string name="color_picker_widget_font_title">Choose font color</string>
+    <string name="color_picker_cancel">Cancel</string>
+    <string name="color_picker_ok">OK</string>
+
+    <!-- Edit Language activity -->
+    <string name="new_language">New Language</string>
+    <string name="edit_language_todo">Todo</string>
+    <string name="edit_language_dialog_save_all_keys_title">Exit</string>
+    <string name="edit_language_dialog_save_all_keys_content">Save the keyboard configuration and quit ?</string>
+
+    <!-- All String action -->
+    <string-array name="item_actions_array">
+        <item>Action</item>
+        <item>SIMPLE KEY</item>
+        <item>FORWARD SPACE</item>
+        <item>BACKSPACE</item>
+        <item>ENTER</item>
+        <item>TAB</item>
+        <item>SPACE BAR</item>
+        <item>TOP</item>
+        <item>DOWN</item>
+        <item>LEFT</item>
+        <item>RIGHT</item>
+        <item>COPY</item>
+        <item>PASTE</item>
+        <item>CUT</item>
+    </string-array>
+
+</resources>

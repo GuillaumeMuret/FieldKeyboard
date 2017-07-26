@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="keyboard_app_bar">55dp</dimen>
+    <dimen name="keyboard_app_bar_icon_size_with_padding">50dp</dimen>
+
+</resources>

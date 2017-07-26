@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutColorPickerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/rect_color_picker_background"
+    android:gravity="center|center_vertical"
+    android:visibility="visible"
+    >
+
+    <TextView
+        android:id="@+id/tvChooseColorTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/keyboard_choose_color_widget_title"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="@string/color_picker_widget_background_title"
+        />
+
+    <com.flask.colorpicker.ColorPickerView
+        android:id="@+id/color_picker_view"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:alphaSlider="true"
+        app:density="12"
+        app:lightnessSlider="true"
+        app:wheelType="FLOWER"
+        app:lightnessSliderView="@+id/v_lightness_slider"
+        app:alphaSliderView="@+id/v_alpha_slider"
+        />
+
+    <com.flask.colorpicker.slider.LightnessSlider
+        android:id="@+id/v_lightness_slider"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        />
+
+    <com.flask.colorpicker.slider.AlphaSlider
+        android:id="@+id/v_alpha_slider"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/btColorPickerCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/selector_attach_keyboard"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/color_picker_button_text_size"
+            android:padding="@dimen/color_picker_button_padding"
+            android:text="@string/color_picker_cancel"
+            />
+
+        <TextView
+            android:id="@+id/btColorPickerOK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/selector_attach_keyboard"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/color_picker_button_text_size"
+            android:padding="@dimen/color_picker_button_padding"
+            android:text="@string/color_picker_ok"
+            />
+
+    </LinearLayout>
+</LinearLayout>

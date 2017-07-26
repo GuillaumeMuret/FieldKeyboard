@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="@dimen/activity_home_text_view_size"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:text="@string/main_activity_word_to_add"
+                />
+
+            <EditText
+                android:id="@+id/etWord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:hint="@string/main_activity_word_to_add_hint"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="@dimen/activity_home_text_view_size"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:text="@string/main_activity_nb_line"
+                />
+
+            <EditText
+                android:id="@+id/nbLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:inputType="number"
+                android:hint="@string/main_activity_nb_line_hint"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="@dimen/activity_home_text_view_size"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:text="@string/main_activity_nb_row"
+                />
+            <EditText
+                android:id="@+id/nbRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:hint="@string/main_activity_nb_row_hint"
+                android:inputType="number"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="@dimen/activity_home_text_view_size"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:text="@string/main_activity_keyboard_height"
+                />
+
+            <EditText
+                android:id="@+id/sizeKeyboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:inputType="number"
+                android:hint="@string/main_activity_keyboard_height_hint" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonLaunchConfig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_home_button_text_view_margin"
+            android:background="@drawable/selector_activity_home_button"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/activity_home_button_size"
+                android:layout_height="@dimen/activity_home_button_size"
+                android:padding="@dimen/activity_home_button_padding"
+                android:src="@drawable/ic_run_config"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_home_button_text_view_font_size"
+                android:padding="@dimen/activity_home_button_text_view_padding"
+                android:text="@string/main_activity_button_launch_configuration"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btAddWord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_home_button_text_view_margin"
+            android:background="@drawable/selector_activity_home_button"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/activity_home_button_size"
+                android:layout_height="@dimen/activity_home_button_size"
+                android:padding="@dimen/activity_home_button_padding"
+                android:src="@drawable/ic_add"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_home_button_text_view_font_size"
+                android:padding="@dimen/activity_home_button_text_view_padding"
+                android:text="@string/main_activity_button_add_word"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btAddParameterKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_home_button_text_view_margin"
+            android:background="@drawable/selector_activity_home_button"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/activity_home_button_size"
+                android:layout_height="@dimen/activity_home_button_size"
+                android:padding="@dimen/activity_home_button_padding"
+                android:src="@drawable/ic_add_parameter_key"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_home_button_text_view_font_size"
+                android:padding="@dimen/activity_home_button_text_view_padding"
+                android:text="@string/main_activity_button_add_parameter_key"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btEditLanguageMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_home_button_text_view_margin"
+            android:background="@drawable/selector_activity_home_button"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/activity_home_button_size"
+                android:layout_height="@dimen/activity_home_button_size"
+                android:padding="@dimen/activity_home_button_padding"
+                android:src="@drawable/ic_edit_language"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_home_button_text_view_font_size"
+                android:padding="@dimen/activity_home_button_text_view_padding"
+                android:text="@string/main_activity_button_edit_language_mode"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btImportWord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_home_button_text_view_margin"
+            android:background="@drawable/selector_activity_home_button"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/activity_home_button_size"
+                android:layout_height="@dimen/activity_home_button_size"
+                android:padding="@dimen/activity_home_button_padding"
+                android:src="@drawable/ic_import_word"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_home_button_text_view_font_size"
+                android:padding="@dimen/activity_home_button_text_view_padding"
+                android:text="@string/main_activity_button_import_word"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btImportKeyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_home_button_text_view_margin"
+            android:background="@drawable/selector_activity_home_button"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/activity_home_button_size"
+                android:layout_height="@dimen/activity_home_button_size"
+                android:padding="@dimen/activity_home_button_padding"
+                android:src="@drawable/ic_import_keyboard"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_home_button_text_view_font_size"
+                android:padding="@dimen/activity_home_button_text_view_padding"
+                android:text="@string/main_activity_button_import_keyboard"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btShowInputMethodPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_home_button_text_view_margin"
+            android:background="@drawable/selector_activity_home_button"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/activity_home_button_size"
+                android:layout_height="@dimen/activity_home_button_size"
+                android:padding="@dimen/activity_home_button_padding"
+                android:src="@drawable/ic_choose_keyboard"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_home_button_text_view_font_size"
+                android:padding="@dimen/activity_home_button_text_view_padding"
+                android:text="@string/main_activity_button_choose_keyboard"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btRemoveAllWord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_home_button_text_view_margin"
+            android:background="@drawable/selector_activity_home_button"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/activity_home_button_size"
+                android:layout_height="@dimen/activity_home_button_size"
+                android:padding="@dimen/activity_home_button_padding"
+                android:src="@drawable/ic_delete_all"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_home_button_text_view_font_size"
+                android:padding="@dimen/activity_home_button_text_view_padding"
+                android:text="@string/main_activity_button_delete_all_keys"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

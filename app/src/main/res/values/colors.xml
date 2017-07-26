@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#BC0D0D</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGrey">#EDEDED</color>
+    <color name="colorRed1">#BC0D0D</color>
+    <color name="colorRed2">#FF0000</color>
+    <color name="colorRed3">#ff9898</color>
+    <color name="colorSemiTransparent">#60000000</color>
+
+    <!-- HOME ACTIVITY -->
+    <color name="color_spinner_hint">@color/colorRed3</color>
+    <color name="color_spinner_item">#ff2c2c</color>
+
+    <!-- CUSTOM KEYBOARD COLOR -->
+    <color name="custom_keyboard_action_bar_background">#EDEDED</color>
+    <color name="custom_keyboard_help_action_bar_background">#acc6ff</color>
+    <color name="custom_keyboard_background">#ffc2c2</color>
+    <color name="custom_keyboard_selected_key_stroke">#FF000000</color>
+
+
+    <!-- COLOR PICKER COLOR -->
+    <color name="color_picker_background">#ffdcdd</color>
+
+</resources>

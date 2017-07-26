@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/activity_edit_language_item_height"
+    android:background="@drawable/rect_red_3"
+    >
+
+    <EditText
+        android:id="@+id/etItem"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        android:padding="@dimen/activity_edit_language_word_padding"
+        android:paddingRight="@dimen/activity_edit_language_word_padding_right"
+        android:textSize="@dimen/activity_home_text_view_font_size"
+        android:fontFamily="sans-serif-light"
+        android:gravity="start"
+        android:textColor="@color/colorBlack"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+</LinearLayout>
