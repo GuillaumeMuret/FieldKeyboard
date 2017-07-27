@@ -97,6 +97,9 @@ public class FileUtils {
             if(keyboardConfiguration.getModelKeyboardKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
                 return true;
             }
+            if(keyboardConfiguration.getModelParameterKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
+                return true;
+            }
         }
         return false;
     }

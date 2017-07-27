@@ -34,6 +34,7 @@ public class DataStore {
     public static final int TIME_ANIMATION_VISIBLE_ITEM = 100;
 
     // The 2 key type of the keyboard
+    public static final String KEY_TYPE             = "KEY_TYPE";
     public static final String KEY_TYPE_KEYBOARD    = "KEY_TYPE_KEYBOARD";
     public static final String KEY_TYPE_PARAMETER   = "KEY_TYPE_PARAMETER";
 

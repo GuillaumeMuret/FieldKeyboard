@@ -37,6 +37,9 @@ public class WordLanguageListAdapter extends RecyclerView.Adapter<WordLanguageLi
     // The language position of the current list
     private int languagePosition;
 
+    // The key type
+    private String keyType;
+
     private IRemoveItemInterface iRemoveItemInterface;
     private ArrayList<EditText> listEditTextItemLanguage;
 
@@ -59,7 +62,8 @@ public class WordLanguageListAdapter extends RecyclerView.Adapter<WordLanguageLi
      * @param languagePosition : the language position
      * @param iRemoveItemInterface : the interface for removing items
      */
-    public WordLanguageListAdapter(int languagePosition, IRemoveItemInterface iRemoveItemInterface) {
+    public WordLanguageListAdapter(String keyType, int languagePosition, IRemoveItemInterface iRemoveItemInterface) {
+        this.keyType = keyType;
         this.listEditTextItemLanguage=new ArrayList<>();
         this.languagePosition = languagePosition;
         this.iRemoveItemInterface=iRemoveItemInterface;
@@ -78,7 +82,11 @@ public class WordLanguageListAdapter extends RecyclerView.Adapter<WordLanguageLi
 
     @Override
     public void onBindViewHolder(final MyWordViewHolder holder, int position) {
-        holder.etItem.setText(DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().get(listEditTextItemLanguage.size()).getKeyLanguages().get(languagePosition));
+        if(keyType.equals(DataStore.KEY_TYPE_KEYBOARD)){
+            holder.etItem.setText(DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().get(listEditTextItemLanguage.size()).getKeyLanguages().get(languagePosition));
+        }else{
+            holder.etItem.setText(DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().get(listEditTextItemLanguage.size()).getKeyLanguages().get(languagePosition));
+        }
         listEditTextItemLanguage.add(holder.etItem);
         if(languagePosition==0) {
             holder.btRemoveWord.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +100,11 @@ public class WordLanguageListAdapter extends RecyclerView.Adapter<WordLanguageLi
 
     @Override
     public int getItemCount() {
-        return DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size();
+        if(keyType.equals(DataStore.KEY_TYPE_KEYBOARD)){
+            return DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size();
+        }else{
+            return DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().size();
+        }
     }
 
     public ArrayList<EditText> getListEditTextItemLanguage(){

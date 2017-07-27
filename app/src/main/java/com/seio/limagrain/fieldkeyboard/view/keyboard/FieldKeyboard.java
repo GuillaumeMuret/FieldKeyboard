@@ -610,17 +610,10 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
      * @param customKeyView : the custom key view selected by the user
      */
     private void manageSimpleKeyAction(CustomKeyView customKeyView) {
-        if(customKeyView.getKeyType().equals(DataStore.KEY_TYPE_KEYBOARD)) {
-            getCurrentInputConnection().commitText(
-                    customKeyView.getModelKey().getKeyLanguages().get(DataStore.getInstance().getKeyboardConfiguration().getSelectedLanguage()),
-                    customKeyView.getModelKey().getKeyLanguages().get(DataStore.getInstance().getKeyboardConfiguration().getSelectedLanguage()).length()
-            );
-        }else{
-            getCurrentInputConnection().commitText(
-                    customKeyView.getModelKey().getKeyLanguages().get(0),
-                    customKeyView.getModelKey().getKeyLanguages().get(0).length()
-            );
-        }
+        getCurrentInputConnection().commitText(
+                customKeyView.getModelKey().getKeyLanguages().get(DataStore.getInstance().getKeyboardConfiguration().getSelectedLanguage()),
+                customKeyView.getModelKey().getKeyLanguages().get(DataStore.getInstance().getKeyboardConfiguration().getSelectedLanguage()).length()
+        );
     }
 
     /**

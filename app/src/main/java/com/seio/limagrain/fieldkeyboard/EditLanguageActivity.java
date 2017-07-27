@@ -47,6 +47,9 @@ import java.util.ArrayList;
 
 public class EditLanguageActivity extends AppCompatActivity implements IRemoveItemInterface{
 
+    // The type of the keys
+    private String keyType;
+
     // Layout of all the language layout
     private LinearLayout llLanguageLayout;
 
@@ -68,6 +71,8 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        keyType = getIntent().getStringExtra(DataStore.KEY_TYPE);
 
         // Set Layout
         setContentView(R.layout.activity_edit_language);
@@ -124,7 +129,7 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
         // Set adapter of the recycler list
-        WordLanguageListAdapter wordLanguageListAdapter = new WordLanguageListAdapter(position,this);
+        WordLanguageListAdapter wordLanguageListAdapter = new WordLanguageListAdapter(keyType,position,this);
         listLanguageAdapter.add(wordLanguageListAdapter);
         recyclerView.setAdapter(wordLanguageListAdapter);
         recyclerView.setHasFixedSize(false);
@@ -163,7 +168,7 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         iconAddWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addOneWord();
+                addNewWord();
             }
         });
 
@@ -197,15 +202,23 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
     /**
      * Process called to add one simple word to all the language ("TO DO" word)
      */
-    private void addOneWord(){
+    private void addNewWord(){
         ModelKey myKey = new ModelKey(getResources().getString(R.string.edit_language_todo), Color.WHITE, Color.BLACK,DataStore.DEFAULT_KEY_TEXT_SIZE,DataStore.ACTION_SIMPLE_KEY,-1);
         myKey.setKeyLanguages(new ArrayList<String>());
         for(int i=0;i<DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().size();i++){
             myKey.getKeyLanguages().add(this.getResources().getString(R.string.edit_language_todo));
         }
-        DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().add(myKey);
-        for(int i=0;i<listLanguageAdapter.size();i++){
-            listLanguageAdapter.get(i).notifyItemInserted(DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size());
+
+        if(keyType.equals(DataStore.KEY_TYPE_KEYBOARD)){
+            DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().add(myKey);
+            for(int i=0;i<listLanguageAdapter.size();i++){
+                listLanguageAdapter.get(i).notifyItemInserted(DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size());
+            }
+        }else{
+            DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().add(myKey);
+            for(int i=0;i<listLanguageAdapter.size();i++){
+                listLanguageAdapter.get(i).notifyItemInserted(DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().size());
+            }
         }
     }
 
@@ -214,7 +227,11 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
      * @param index : the index of the word to remove
      */
     public void removeWord(int index){
-        DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().remove(index);
+        if(keyType.equals(DataStore.KEY_TYPE_KEYBOARD)) {
+            DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().remove(index);
+        }else{
+            DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().remove(index);
+        }
         for(int i=0;i<listLanguageAdapter.size();i++){
             listLanguageAdapter.get(i).getListEditTextItemLanguage().get(index).clearFocus();
             listLanguageAdapter.get(i).getListEditTextItemLanguage().remove(index);
@@ -229,6 +246,9 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().add(getApplicationContext().getResources().getString(R.string.new_language));
         for(int i=0;i<DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size();i++){
             DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().get(i).getKeyLanguages().add(this.getResources().getString(R.string.edit_language_todo));
+        }
+        for(int i=0;i<DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().size();i++){
+            DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().get(i).getKeyLanguages().add(this.getResources().getString(R.string.edit_language_todo));
         }
         addLayoutLanguage(DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().size()-1);
     }
@@ -256,9 +276,17 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
             if(listLanguageName.get(i).getText().toString().length()==0){
                 return true;
             }
-            for(int j=0;j<DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size();j++){
-                if(listLanguageAdapter.get(i).getListEditTextItemLanguage().get(j).getText().toString().length()==0){
-                    return true;
+            if(keyType.equals(DataStore.KEY_TYPE_KEYBOARD)) {
+                for(int j=0;j<DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size();j++) {
+                    if (listLanguageAdapter.get(i).getListEditTextItemLanguage().get(j).getText().toString().length() == 0) {
+                        return true;
+                    }
+                }
+            }else{
+                for(int j=0;j<DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().size();j++) {
+                    if (listLanguageAdapter.get(i).getListEditTextItemLanguage().get(j).getText().toString().length() == 0) {
+                        return true;
+                    }
                 }
             }
         }
@@ -272,22 +300,31 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         if(!isErrorLanguage()) {
             for (int i = 0; i < listLanguageName.size(); i++) {
                 DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().set(i,listLanguageName.get(i).getText().toString());
-                for(int j=0;j<DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size();j++){
-                    DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().get(j).getKeyLanguages().set(
-                            i,
-                            listLanguageAdapter.get(i).getListEditTextItemLanguage().get(j).getText().toString()
-                    );
+                if(keyType.equals(DataStore.KEY_TYPE_KEYBOARD)) {
+                    for (int j = 0; j < DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size(); j++) {
+                        DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().get(j).getKeyLanguages().set(
+                                i,
+                                listLanguageAdapter.get(i).getListEditTextItemLanguage().get(j).getText().toString()
+                        );
+                    }
+                }else{
+                    for (int j = 0; j < DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().size(); j++) {
+                        DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().get(j).getKeyLanguages().set(
+                                i,
+                                listLanguageAdapter.get(i).getListEditTextItemLanguage().get(j).getText().toString()
+                        );
+                    }
                 }
             }
             DataStore.getInstance().setKeyboardConfiguration(DataStore.getInstance().getTmpKeyboardConfiguration());
             if(DataStore.getInstance().getKeyboardConfiguration().getSelectedLanguage()>DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size()){
                 DataStore.getInstance().getKeyboardConfiguration().setSelectedLanguage(0);
             }
-            if(DataStore.getInstance().getFieldKeyboard()!=null){
-                DataStore.getInstance().getFieldKeyboard().applyKeyboardConfiguration();
-            }
             if (PermissionUtils.checkStoragePermissions(this)) {
                 FileUtils.saveKeyboardConfiguration();
+            }
+            if(DataStore.getInstance().getFieldKeyboard()!=null){
+                DataStore.getInstance().getFieldKeyboard().applyKeyboardConfiguration();
             }
         }else{
             Toast.makeText(this,getResources().getString(R.string.error_message_empty_field),Toast.LENGTH_SHORT).show();

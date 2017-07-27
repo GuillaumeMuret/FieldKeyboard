@@ -193,7 +193,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btEditLanguageMode"
+            android:id="@+id/btEditKeyboardKeysLanguage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_home_button_text_view_margin"
@@ -215,7 +215,35 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/activity_home_button_text_view_font_size"
                 android:padding="@dimen/activity_home_button_text_view_padding"
-                android:text="@string/main_activity_button_edit_language_mode"
+                android:text="@string/main_activity_button_edit_keyboard_keys_language"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btEditFixedKeysLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_home_button_text_view_margin"
+            android:background="@drawable/selector_activity_home_button"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/activity_home_button_size"
+                android:layout_height="@dimen/activity_home_button_size"
+                android:padding="@dimen/activity_home_button_padding"
+                android:src="@drawable/ic_edit_language"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/activity_home_button_text_view_font_size"
+                android:padding="@dimen/activity_home_button_text_view_padding"
+                android:text="@string/main_activity_button_edit_fixed_keys_language"
                 />
 
         </LinearLayout>

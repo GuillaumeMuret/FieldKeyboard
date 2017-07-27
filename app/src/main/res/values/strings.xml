@@ -19,7 +19,8 @@
     <string name="main_activity_button_launch_configuration">Launch configuration</string>
     <string name="main_activity_button_add_word">Add the word</string>
     <string name="main_activity_button_add_parameter_key">Add fixed key</string>
-    <string name="main_activity_button_edit_language_mode">Edit language mode</string>
+    <string name="main_activity_button_edit_keyboard_keys_language">Edit non fixed keys language</string>
+    <string name="main_activity_button_edit_fixed_keys_language">Edit fixed keys language</string>
     <string name="main_activity_button_delete_all_keys">Delete all keys</string>
     <string name="main_activity_button_import_word">Import word</string>
     <string name="main_activity_button_choose_keyboard">Choose keyboard</string>

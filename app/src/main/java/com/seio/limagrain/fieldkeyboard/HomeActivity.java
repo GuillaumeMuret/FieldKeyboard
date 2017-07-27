@@ -79,7 +79,8 @@ public class HomeActivity extends AppCompatActivity {
     private View btAddWord;
     private View btAddParameterKey;
     private View btImportKeyboard;
-    private View btEditLanguageMode;
+    private View btEditKeyboardKeysLanguage;
+    private View btEditFixedKeysLanguage;
     private View btRemoveAllKeys;
     private View btImportWord;
     private View btShowInputMethodPicker;
@@ -99,7 +100,8 @@ public class HomeActivity extends AppCompatActivity {
         btLaunchConfig = findViewById(R.id.buttonLaunchConfig);
         btAddWord = findViewById(R.id.btAddWord);
         btAddParameterKey = findViewById(R.id.btAddParameterKey);
-        btEditLanguageMode = findViewById(R.id.btEditLanguageMode);
+        btEditKeyboardKeysLanguage = findViewById(R.id.btEditKeyboardKeysLanguage);
+        btEditFixedKeysLanguage = findViewById(R.id.btEditFixedKeysLanguage);
         btRemoveAllKeys = findViewById(R.id.btRemoveAllWord);
         btImportWord = findViewById(R.id.btImportWord);
         btImportKeyboard = findViewById(R.id.btImportKeyboard);
@@ -179,10 +181,20 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        btEditLanguageMode.setOnClickListener(new View.OnClickListener() {
+        btEditKeyboardKeysLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EditLanguageActivity.class);
+                intent.putExtra(DataStore.KEY_TYPE, DataStore.KEY_TYPE_KEYBOARD);
+                startActivity(intent);
+            }
+        });
+
+        btEditFixedKeysLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), EditLanguageActivity.class);
+                intent.putExtra(DataStore.KEY_TYPE, DataStore.KEY_TYPE_PARAMETER);
                 startActivity(intent);
             }
         });
