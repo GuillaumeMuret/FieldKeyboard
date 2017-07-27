@@ -297,8 +297,7 @@ public class HomeActivity extends AppCompatActivity {
      * Process called to remove all the keyboard keys (fixed and keyboard)
      */
     private void removeAllKeys(){
-        DataStore.getInstance().getKeyboardConfiguration().setModelKeyboardKeys(new ArrayList<ModelKey>());
-        DataStore.getInstance().getKeyboardConfiguration().setModelParameterKeys(new ArrayList<ModelKey>());
+        DataStore.getInstance().setKeyboardConfiguration(new KeyboardConfiguration());
         saveKeyboardConfiguration();
         if(DataStore.getInstance().getFieldKeyboard()!=null){
             DataStore.getInstance().getFieldKeyboard().applyKeyboardConfiguration();
