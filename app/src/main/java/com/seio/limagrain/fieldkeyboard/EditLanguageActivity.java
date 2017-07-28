@@ -50,6 +50,10 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
     // The type of the keys
     private String keyType;
 
+    // Layout action and icon
+    private LinearLayout llKeyActionLayout;
+    private LinearLayout llKeyIconLayout;
+
     // Layout of all the language layout
     private LinearLayout llLanguageLayout;
 
@@ -80,13 +84,18 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         btAddLanguage           =                                   findViewById(R.id.btAddLanguage);
         btSaveLanguage          =                                   findViewById(R.id.btSaveLanguage);
 
+        llKeyActionLayout       =           (LinearLayout)          findViewById(R.id.llKeyActionLayout);
+        llKeyIconLayout         =           (LinearLayout)          findViewById(R.id.llKeyIconLayout);
+
         // Init to Tmp keyboard config
         DataStore.getInstance().setTmpKeyboardConfiguration(DataStore.getInstance().getKeyboardConfiguration());
 
         // init the listeners
         initListeners();
 
-        // init layout language
+        // init layout
+        initLayoutAction();
+        initLayoutIcon();
         initLayoutLanguage();
     }
 
@@ -186,6 +195,24 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
             llLanguageViewIconAndTitleAndContent.addView(iconAddWord);
         }
         llLanguageLayout.addView(llLanguageViewIconAndTitleAndContent);
+    }
+
+    /**
+     * Init the layout action
+     */
+    private void initLayoutAction(){
+        // TODO
+        //listKeyActionAdapter = new ArrayList<>();
+        //addLayoutAction(i);
+    }
+
+    /**
+     * Init the layout icon
+     */
+    private void initLayoutIcon(){
+        // TODO
+        //listKeyIconAdapter = new ArrayList<>();
+        //addLayoutIcon(i);
     }
 
     /**
