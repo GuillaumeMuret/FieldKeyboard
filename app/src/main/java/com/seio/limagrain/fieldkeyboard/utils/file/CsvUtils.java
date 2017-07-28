@@ -38,23 +38,25 @@ public class CsvUtils {
     // The different constant of the keyboard file
     private static final int CSV_FILE_KEYBOARD_CONFIGURATION_LINE_NUMBER    = 3;
     private static final int CSV_FILE_KEYBOARD_KEYS_LANGUAGE_NAME_POSITION  = 3;
-    private static final int CSV_FILE_FIXED_KEYS_LANGUAGE_NAME_POSITION     = 5;
+    private static final int CSV_FILE_KEYS_LANGUAGE_NAME_POSITION = 5;
 
     // The CSV file name
     private static final String CSV_NAME_FILE = "CustomKeyboardConfig.csv";
 
     // The key of the CSV file
-    private static final String KEY_KEYBOARD_CONFIGURATION = "KeyboardConfiguration";
-    private static final String KEY_KEYBOARD_HEIGHT        = "keyboardHeight";
-    private static final String KEY_NB_LINE                = "nbLine";
-    private static final String KEY_NB_ROW                 = "nbRow";
-    private static final String KEY_KEYBOARD_KEYS          = "KeyboardKeys";
-    private static final String KEY_FIXED_KEYS             = "FixedKeys";
-    private static final String KEY_BACKGROUND_COLOR       = "keyBackgroundColor";
-    private static final String KEY_FRONT_COLOR            = "keyFrontColor";
-    private static final String KEY_FRONT_SIZE             = "keyFrontSize";
-    private static final String KEY_ACTION                 = "keyAction";
-    private static final String KEY_ICON                   = "keyIcon";
+    private static final String KEY_KEYBOARD_CONFIGURATION  = "KeyboardConfiguration";
+    private static final String KEY_BOTTOM_KEYBOARD         = "BottomKeyboard";
+    private static final String KEY_TOP_KEYBOARD            = "TopKeyboard";
+    private static final String KEY_KEYBOARD_HEIGHT         = "keyboardHeight";
+    private static final String KEY_NB_LINE                 = "nbLine";
+    private static final String KEY_NB_ROW                  = "nbRow";
+    private static final String KEY_BOTTOM_KEYBOARD_KEYS    = "BottomKeys";
+    private static final String KEY_TOP_KEYBOARD_KEYS       = "TopKeys";
+    private static final String KEY_BACKGROUND_COLOR        = "keyBackgroundColor";
+    private static final String KEY_FRONT_COLOR             = "keyFrontColor";
+    private static final String KEY_FRONT_SIZE              = "keyFrontSize";
+    private static final String KEY_ACTION                  = "keyAction";
+    private static final String KEY_ICON                    = "keyIcon";
 
     /**
      * Process called to read Csv file and return an ArrayList of the file line by line
@@ -97,13 +99,16 @@ public class CsvUtils {
         if (stringCsvFile.size() > 0) {
             for (int line = 0; line < stringCsvFile.size(); line++) {
                 if (stringCsvFile.get(line).length > 0) {
-                    if (stringCsvFile.get(line)[0].equals(KEY_KEYBOARD_CONFIGURATION)) {
-                        manageKeyboardConfigurationStringCSV(line + 1, stringCsvFile);
+                    if (stringCsvFile.get(line)[0].equals(KEY_BOTTOM_KEYBOARD)) {
+                        manageKeyboardBottomConfigurationStringCSV(line + 1, stringCsvFile);
                         line = line + CSV_FILE_KEYBOARD_CONFIGURATION_LINE_NUMBER;
-                    } else if (stringCsvFile.get(line)[0].equals(KEY_KEYBOARD_KEYS)) {
-                        line = manageKeyboardKeysStringCSV(line + 1, stringCsvFile);
-                    } else if (stringCsvFile.get(line)[0].equals(KEY_FIXED_KEYS)) {
-                        line = manageFixedKeysStringCSV(line + 1, stringCsvFile);
+                    } else if (stringCsvFile.get(line)[0].equals(KEY_TOP_KEYBOARD)) {
+                        manageKeyboardTopConfigurationStringCSV(line + 1, stringCsvFile);
+                        line = line + CSV_FILE_KEYBOARD_CONFIGURATION_LINE_NUMBER;
+                    } else if (stringCsvFile.get(line)[0].equals(KEY_BOTTOM_KEYBOARD_KEYS)) {
+                        line = manageBottomKeyboardKeysStringCSV(line + 1, stringCsvFile);
+                    } else if (stringCsvFile.get(line)[0].equals(KEY_TOP_KEYBOARD_KEYS)) {
+                        line = manageTopKeyboardKeysStringCSV(line + 1, stringCsvFile);
                     }
                 }
             }
@@ -119,19 +124,44 @@ public class CsvUtils {
      * @param line          : the current line
      * @param stringCsvFile : the ArrayList of the file line by line
      */
-    private static void manageKeyboardConfigurationStringCSV(int line, ArrayList<String[]> stringCsvFile) {
+    private static void manageKeyboardBottomConfigurationStringCSV(int line, ArrayList<String[]> stringCsvFile) {
         for (int i = 0; i < CSV_FILE_KEYBOARD_CONFIGURATION_LINE_NUMBER; i++) {
             switch (stringCsvFile.get(line + i)[0]) {
                 case KEY_KEYBOARD_HEIGHT:
-                    DataStore.getInstance().getTmpKeyboardConfiguration().setKeyboardHeight(Integer.valueOf(stringCsvFile.get(line + i)[1]));
+                    DataStore.getInstance().getTmpKeyboardConfiguration().setBottomKeyboardHeight(Integer.valueOf(stringCsvFile.get(line + i)[1]));
                     break;
 
                 case KEY_NB_LINE:
-                    DataStore.getInstance().getTmpKeyboardConfiguration().setNbLine(Integer.valueOf(stringCsvFile.get(line + i)[1]));
+                    DataStore.getInstance().getTmpKeyboardConfiguration().setBottomKeyboardNbLine(Integer.valueOf(stringCsvFile.get(line + i)[1]));
                     break;
 
                 case KEY_NB_ROW:
-                    DataStore.getInstance().getTmpKeyboardConfiguration().setNbRow(Integer.valueOf(stringCsvFile.get(line + i)[1]));
+                    DataStore.getInstance().getTmpKeyboardConfiguration().setBottomKeyboardNbRow(Integer.valueOf(stringCsvFile.get(line + i)[1]));
+                    break;
+            }
+        }
+        DataStore.getInstance().getTmpKeyboardConfiguration().setSelectedLanguage(0);
+    }
+
+    /**
+     * Process called to manage the KeyboardConfiguration paragraph in the CSV file
+     *
+     * @param line          : the current line
+     * @param stringCsvFile : the ArrayList of the file line by line
+     */
+    private static void manageKeyboardTopConfigurationStringCSV(int line, ArrayList<String[]> stringCsvFile) {
+        for (int i = 0; i < CSV_FILE_KEYBOARD_CONFIGURATION_LINE_NUMBER; i++) {
+            switch (stringCsvFile.get(line + i)[0]) {
+                case KEY_KEYBOARD_HEIGHT:
+                    DataStore.getInstance().getTmpKeyboardConfiguration().setTopKeyboardHeight(Integer.valueOf(stringCsvFile.get(line + i)[1]));
+                    break;
+
+                case KEY_NB_LINE:
+                    DataStore.getInstance().getTmpKeyboardConfiguration().setTopKeyboardNbLine(Integer.valueOf(stringCsvFile.get(line + i)[1]));
+                    break;
+
+                case KEY_NB_ROW:
+                    DataStore.getInstance().getTmpKeyboardConfiguration().setTopKeyboardNbRow(Integer.valueOf(stringCsvFile.get(line + i)[1]));
                     break;
             }
         }
@@ -160,22 +190,22 @@ public class CsvUtils {
      * @param stringCsvFile : ArrayList of the file line by line
      * @return the next current line (at the end of the paragraph)
      */
-    private static int manageKeyboardKeysStringCSV(int line, ArrayList<String[]> stringCsvFile) {
-        manageFirstLineKeyboardKeysStringCSV(line, stringCsvFile);
+    private static int manageBottomKeyboardKeysStringCSV(int line, ArrayList<String[]> stringCsvFile) {
+        manageFirstLineKeyboardKeysStringCSV(line,stringCsvFile);
         line++;
         while (line < stringCsvFile.size() && stringCsvFile.get(line).length > 0 && stringCsvFile.get(line)[0].substring(0, 1).equals("#")) {
             ModelKey currentModelKey = new ModelKey(
-                    stringCsvFile.get(line)[CSV_FILE_KEYBOARD_KEYS_LANGUAGE_NAME_POSITION],
+                    stringCsvFile.get(line)[CSV_FILE_KEYS_LANGUAGE_NAME_POSITION],
                     Color.parseColor(stringCsvFile.get(line)[0]),
                     Color.parseColor(stringCsvFile.get(line)[1]),
                     Integer.valueOf(stringCsvFile.get(line)[2]),
-                    DataStore.ACTION_SIMPLE_KEY,
-                    -1
+                    String.valueOf(stringCsvFile.get(line)[3]),
+                    Integer.valueOf(stringCsvFile.get(line)[4])
             );
-            for (int i = CSV_FILE_KEYBOARD_KEYS_LANGUAGE_NAME_POSITION + 1; i < stringCsvFile.get(line).length; i++) {
+            for (int i = CSV_FILE_KEYS_LANGUAGE_NAME_POSITION + 1; i < stringCsvFile.get(line).length; i++) {
                 currentModelKey.getKeyLanguages().add(stringCsvFile.get(line)[i]);
             }
-            DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().add(currentModelKey);
+            DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().add(currentModelKey);
             line++;
         }
         DataStore.getInstance().getTmpKeyboardConfiguration().setSelectedLanguage(0);
@@ -188,21 +218,21 @@ public class CsvUtils {
      * @param stringCsvFile : ArrayList of the file line by line
      * @return the next current line (at the end of the paragraph)
      */
-    private static int manageFixedKeysStringCSV(int line, ArrayList<String[]> stringCsvFile) {
+    private static int manageTopKeyboardKeysStringCSV(int line, ArrayList<String[]> stringCsvFile) {
         line++;
         while (line < stringCsvFile.size() && stringCsvFile.get(line).length > 0 && stringCsvFile.get(line)[0].substring(0, 1).equals("#")) {
             ModelKey currentModelKey = new ModelKey(
-                    stringCsvFile.get(line)[CSV_FILE_FIXED_KEYS_LANGUAGE_NAME_POSITION],
+                    stringCsvFile.get(line)[CSV_FILE_KEYS_LANGUAGE_NAME_POSITION],
                     Color.parseColor(stringCsvFile.get(line)[0]),
                     Color.parseColor(stringCsvFile.get(line)[1]),
                     Integer.valueOf(stringCsvFile.get(line)[2]),
                     String.valueOf(stringCsvFile.get(line)[3]),
                     Integer.valueOf(stringCsvFile.get(line)[4])
             );
-            for (int i = CSV_FILE_FIXED_KEYS_LANGUAGE_NAME_POSITION + 1; i < stringCsvFile.get(line).length; i++) {
+            for (int i = CSV_FILE_KEYS_LANGUAGE_NAME_POSITION + 1; i < stringCsvFile.get(line).length; i++) {
                 currentModelKey.getKeyLanguages().add(stringCsvFile.get(line)[i]);
             }
-            DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().add(currentModelKey);
+            DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().add(currentModelKey);
             line++;
         }
         DataStore.getInstance().getTmpKeyboardConfiguration().setSelectedLanguage(0);
@@ -219,10 +249,10 @@ public class CsvUtils {
         stringCsvFile = manageExportKeyboardConfiguration(stringCsvFile);
 
         // Keyboard keys
-        stringCsvFile = manageExportKeyboardKeys(stringCsvFile);
+        stringCsvFile = manageExportBottomKeyboardKeys(stringCsvFile);
 
         // Fixed keys
-        stringCsvFile = manageExportFixedKeys(stringCsvFile);
+        stringCsvFile = manageExportTopKeyboardKeys(stringCsvFile);
 
         // Export file
         generateCsvFile(stringCsvFile);
@@ -235,11 +265,16 @@ public class CsvUtils {
      */
     private static ArrayList<String[]> manageExportKeyboardConfiguration(ArrayList<String[]> stringCsvFile) {
         stringCsvFile.add(new String[]{KEY_KEYBOARD_CONFIGURATION});
-        stringCsvFile.add(new String[]{KEY_KEYBOARD_HEIGHT, String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getKeyboardHeight())});
-        stringCsvFile.add(new String[]{KEY_NB_LINE, String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getNbLine())});
-        stringCsvFile.add(new String[]{KEY_NB_ROW, String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getNbRow())});
-
-        // Add \n
+        stringCsvFile.add(new String[]{});
+        stringCsvFile.add(new String[]{KEY_BOTTOM_KEYBOARD});
+        stringCsvFile.add(new String[]{KEY_KEYBOARD_HEIGHT, String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardHeight())});
+        stringCsvFile.add(new String[]{KEY_NB_LINE, String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine())});
+        stringCsvFile.add(new String[]{KEY_NB_ROW, String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbRow())});
+        stringCsvFile.add(new String[]{});
+        stringCsvFile.add(new String[]{KEY_TOP_KEYBOARD});
+        stringCsvFile.add(new String[]{KEY_KEYBOARD_HEIGHT, String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardHeight())});
+        stringCsvFile.add(new String[]{KEY_NB_LINE, String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbLine())});
+        stringCsvFile.add(new String[]{KEY_NB_ROW, String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbRow())});
         stringCsvFile.add(new String[]{});
         return stringCsvFile;
     }
@@ -249,24 +284,28 @@ public class CsvUtils {
      * @param stringCsvFile : the ArrayList of the file line by line
      * @return the ArrayList of the file line by line with the new paragraph
      */
-    private static ArrayList<String[]> manageExportKeyboardKeys(ArrayList<String[]> stringCsvFile) {
-        stringCsvFile.add(new String[]{KEY_KEYBOARD_KEYS});
-        String[] strKeyboardKeysLineTitle = new String[DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size() + CSV_FILE_KEYBOARD_KEYS_LANGUAGE_NAME_POSITION];
-        strKeyboardKeysLineTitle[0] = KEY_BACKGROUND_COLOR;
-        strKeyboardKeysLineTitle[1] = KEY_FRONT_COLOR;
-        strKeyboardKeysLineTitle[2] = KEY_FRONT_SIZE;
+    private static ArrayList<String[]> manageExportBottomKeyboardKeys(ArrayList<String[]> stringCsvFile) {
+        stringCsvFile.add(new String[]{KEY_BOTTOM_KEYBOARD_KEYS});
+        String[] strFixedKeysLineTitle = new String[DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size() + CSV_FILE_KEYS_LANGUAGE_NAME_POSITION];
+        strFixedKeysLineTitle[0] = KEY_BACKGROUND_COLOR;
+        strFixedKeysLineTitle[1] = KEY_FRONT_COLOR;
+        strFixedKeysLineTitle[2] = KEY_FRONT_SIZE;
+        strFixedKeysLineTitle[3] = KEY_ACTION;
+        strFixedKeysLineTitle[4] = KEY_ICON;
         for (int i = 0; i < DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size(); i++) {
-            strKeyboardKeysLineTitle[3 + i] = DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().get(i);
+            strFixedKeysLineTitle[5 + i] = DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().get(i);
         }
-        stringCsvFile.add(strKeyboardKeysLineTitle);
+        stringCsvFile.add(strFixedKeysLineTitle);
 
-        for (int i = 0; i < DataStore.getInstance().getKeyboardConfiguration().getModelKeyboardKeys().size(); i++) {
-            String[] strLineContent = new String[DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size() + CSV_FILE_KEYBOARD_KEYS_LANGUAGE_NAME_POSITION];
-            strLineContent[0] = String.format("#%06X", (0xFFFFFF & DataStore.getInstance().getKeyboardConfiguration().getModelKeyboardKeys().get(i).getKeyBackgroundColor()));
-            strLineContent[1] = String.format("#%06X", (0xFFFFFF & DataStore.getInstance().getKeyboardConfiguration().getModelKeyboardKeys().get(i).getKeyFrontColor()));
-            strLineContent[2] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelKeyboardKeys().get(i).getKeyFrontSize());
+        for (int i = 0; i < DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().size(); i++) {
+            String[] strLineContent = new String[DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size() + CSV_FILE_KEYS_LANGUAGE_NAME_POSITION];
+            strLineContent[0] = String.format("#%06X", (0xFFFFFF & DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).getKeyBackgroundColor()));
+            strLineContent[1] = String.format("#%06X", (0xFFFFFF & DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).getKeyFrontColor()));
+            strLineContent[2] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).getKeyFrontSize());
+            strLineContent[3] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).getKeyAction());
+            strLineContent[4] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).getKeyIcon());
             for (int j = 0; j < DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size(); j++) {
-                strLineContent[3 + j] = DataStore.getInstance().getKeyboardConfiguration().getModelKeyboardKeys().get(i).getKeyLanguages().get(j);
+                strLineContent[5 + j] = DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).getKeyLanguages().get(j);
             }
             stringCsvFile.add(strLineContent);
         }
@@ -281,9 +320,9 @@ public class CsvUtils {
      * @param stringCsvFile : the ArrayList of the file line by line
      * @return the ArrayList of the file line by line with the new paragraph
      */
-    private static ArrayList<String[]> manageExportFixedKeys(ArrayList<String[]> stringCsvFile) {
-        stringCsvFile.add(new String[]{KEY_KEYBOARD_KEYS});
-        String[] strFixedKeysLineTitle = new String[DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size() + CSV_FILE_FIXED_KEYS_LANGUAGE_NAME_POSITION];
+    private static ArrayList<String[]> manageExportTopKeyboardKeys(ArrayList<String[]> stringCsvFile) {
+        stringCsvFile.add(new String[]{KEY_TOP_KEYBOARD_KEYS});
+        String[] strFixedKeysLineTitle = new String[DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size() + CSV_FILE_KEYS_LANGUAGE_NAME_POSITION];
         strFixedKeysLineTitle[0] = KEY_BACKGROUND_COLOR;
         strFixedKeysLineTitle[1] = KEY_FRONT_COLOR;
         strFixedKeysLineTitle[2] = KEY_FRONT_SIZE;
@@ -294,15 +333,15 @@ public class CsvUtils {
         }
         stringCsvFile.add(strFixedKeysLineTitle);
 
-        for (int i = 0; i < DataStore.getInstance().getKeyboardConfiguration().getModelParameterKeys().size(); i++) {
-            String[] strLineContent = new String[DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size() + CSV_FILE_FIXED_KEYS_LANGUAGE_NAME_POSITION];
-            strLineContent[0] = String.format("#%06X", (0xFFFFFF & DataStore.getInstance().getKeyboardConfiguration().getModelParameterKeys().get(i).getKeyBackgroundColor()));
-            strLineContent[1] = String.format("#%06X", (0xFFFFFF & DataStore.getInstance().getKeyboardConfiguration().getModelParameterKeys().get(i).getKeyFrontColor()));
-            strLineContent[2] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelParameterKeys().get(i).getKeyFrontSize());
-            strLineContent[3] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelParameterKeys().get(i).getKeyAction());
-            strLineContent[4] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelParameterKeys().get(i).getKeyIcon());
+        for (int i = 0; i < DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().size(); i++) {
+            String[] strLineContent = new String[DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size() + CSV_FILE_KEYS_LANGUAGE_NAME_POSITION];
+            strLineContent[0] = String.format("#%06X", (0xFFFFFF & DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).getKeyBackgroundColor()));
+            strLineContent[1] = String.format("#%06X", (0xFFFFFF & DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).getKeyFrontColor()));
+            strLineContent[2] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).getKeyFrontSize());
+            strLineContent[3] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).getKeyAction());
+            strLineContent[4] = String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).getKeyIcon());
             for (int j = 0; j < DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size(); j++) {
-                strLineContent[5 + j] = DataStore.getInstance().getKeyboardConfiguration().getModelParameterKeys().get(i).getKeyLanguages().get(j);
+                strLineContent[5 + j] = DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).getKeyLanguages().get(j);
             }
             stringCsvFile.add(strLineContent);
         }

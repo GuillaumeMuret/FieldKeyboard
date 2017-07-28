@@ -35,8 +35,8 @@ public class DataStore {
 
     // The 2 key type of the keyboard
     public static final String KEY_TYPE             = "KEY_TYPE";
-    public static final String KEY_TYPE_KEYBOARD    = "KEY_TYPE_KEYBOARD";
-    public static final String KEY_TYPE_PARAMETER   = "KEY_TYPE_PARAMETER";
+    public static final String KEY_TYPE_BOTTOM      = "KEY_TYPE_BOTTOM";
+    public static final String KEY_TYPE_TOP         = "KEY_TYPE_TOP";
 
     // The default icon size and text size
     public static final int DEFAULT_KEY_ICON_SIZE = 100;

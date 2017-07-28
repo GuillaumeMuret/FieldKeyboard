@@ -59,10 +59,10 @@ public class ViewUtils {
         //use a GradientDrawable with only one color set, to make it a solid color
         GradientDrawable border = new GradientDrawable();
 
-        if(customKeyView.getKeyType().equals(DataStore.KEY_TYPE_KEYBOARD)) {
-            border.setColor(DataStore.getInstance().getKeyboardConfiguration().getModelKeyboardKeys().get(customKeyView.getItemNumber()).getKeyBackgroundColor());
-        }else if(customKeyView.getKeyType().equals(DataStore.KEY_TYPE_PARAMETER)) {
-            border.setColor(DataStore.getInstance().getKeyboardConfiguration().getModelParameterKeys().get(customKeyView.getItemNumber()).getKeyBackgroundColor());
+        if(customKeyView.getKeyType().equals(DataStore.KEY_TYPE_BOTTOM)) {
+            border.setColor(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(customKeyView.getItemNumber()).getKeyBackgroundColor());
+        }else if(customKeyView.getKeyType().equals(DataStore.KEY_TYPE_TOP)) {
+            border.setColor(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(customKeyView.getItemNumber()).getKeyBackgroundColor());
         }
         if(customKeyView.isSelected()) {
             border.setStroke(
@@ -111,14 +111,30 @@ public class ViewUtils {
      * @param llKeyboardSize : the keyboard layout
      * @param y : the size of the keyboard
      */
-    public static void resizeKeyboardHeight(Context context, View llKeyboardSize, int y){
+    public static void resizeBottomKeyboardHeight(Context context, View llKeyboardSize, int y){
         int currentHeight = llKeyboardSize.getHeight();
         llKeyboardSize.setLayoutParams(
                 new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         currentHeight-y
                 ));
-        DataStore.getInstance().getKeyboardConfiguration().setKeyboardHeight(DimUtils.pixelToDip(context,currentHeight-y));
+        DataStore.getInstance().getKeyboardConfiguration().setBottomKeyboardHeight(DimUtils.pixelToDip(context,currentHeight-y));
+    }
+
+    /**
+     * Process called to resize keyboard height
+     * @param context : the context of the app
+     * @param llKeyboardSize : the keyboard layout
+     * @param y : the size of the keyboard
+     */
+    public static void resizeTopKeyboardHeight(Context context, View llKeyboardSize, int y){
+        int currentHeight = llKeyboardSize.getHeight();
+        llKeyboardSize.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        currentHeight-y
+                ));
+        DataStore.getInstance().getKeyboardConfiguration().setTopKeyboardHeight(DimUtils.pixelToDip(context,currentHeight-y));
     }
 
     /**

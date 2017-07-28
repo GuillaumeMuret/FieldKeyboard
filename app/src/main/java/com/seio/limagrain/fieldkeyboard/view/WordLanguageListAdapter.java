@@ -82,10 +82,10 @@ public class WordLanguageListAdapter extends RecyclerView.Adapter<WordLanguageLi
 
     @Override
     public void onBindViewHolder(final MyWordViewHolder holder, int position) {
-        if(keyType.equals(DataStore.KEY_TYPE_KEYBOARD)){
-            holder.etItem.setText(DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().get(listEditTextItemLanguage.size()).getKeyLanguages().get(languagePosition));
+        if(keyType.equals(DataStore.KEY_TYPE_BOTTOM)){
+            holder.etItem.setText(DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().get(listEditTextItemLanguage.size()).getKeyLanguages().get(languagePosition));
         }else{
-            holder.etItem.setText(DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().get(listEditTextItemLanguage.size()).getKeyLanguages().get(languagePosition));
+            holder.etItem.setText(DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().get(listEditTextItemLanguage.size()).getKeyLanguages().get(languagePosition));
         }
         listEditTextItemLanguage.add(holder.etItem);
         if(languagePosition==0) {
@@ -100,10 +100,10 @@ public class WordLanguageListAdapter extends RecyclerView.Adapter<WordLanguageLi
 
     @Override
     public int getItemCount() {
-        if(keyType.equals(DataStore.KEY_TYPE_KEYBOARD)){
-            return DataStore.getInstance().getTmpKeyboardConfiguration().getModelKeyboardKeys().size();
+        if(keyType.equals(DataStore.KEY_TYPE_BOTTOM)){
+            return DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().size();
         }else{
-            return DataStore.getInstance().getTmpKeyboardConfiguration().getModelParameterKeys().size();
+            return DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().size();
         }
     }
 

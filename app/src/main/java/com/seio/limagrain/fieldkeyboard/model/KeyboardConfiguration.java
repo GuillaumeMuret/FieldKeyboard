@@ -27,14 +27,29 @@ import java.util.ArrayList;
 
 public class KeyboardConfiguration implements Serializable {
 
-    @SerializedName("keyboard_height")
-    private int keyboardHeight;
+    @SerializedName("bottom_keyboard_height")
+    private int bottomKeyboardHeight;
 
-    @SerializedName("keyboard_nb_line")
-    private int nbLine;
+    @SerializedName("bottom_keyboard_nb_line")
+    private int bottomKeyboardNbLine;
 
-    @SerializedName("keyboard_nb_row")
-    private int nbRow;
+    @SerializedName("bottom_keyboard_nb_row")
+    private int bottomKeyboardNbRow;
+
+    @SerializedName("bottom_keyboard_key")
+    private ArrayList<ModelKey> modelBottomKeys;
+
+    @SerializedName("top_keyboard_height")
+    private int topKeyboardHeight;
+
+    @SerializedName("top_keyboard_nb_line")
+    private int topKeyboardNbLine;
+
+    @SerializedName("top_keyboard_nb_row")
+    private int topKeyboardNbRow;
+
+    @SerializedName("top_keyboard_key")
+    private ArrayList<ModelKey> modelTopKeys;
 
     @SerializedName("selected_language")
     private int selectedLanguage;
@@ -42,20 +57,19 @@ public class KeyboardConfiguration implements Serializable {
     @SerializedName("keyboard_nb_language")
     private ArrayList<String> keyboardLanguages;
 
-    @SerializedName("keyboard_key")
-    private ArrayList<ModelKey> modelKeyboardKeys;
-
-    @SerializedName("parameter_key")
-    private ArrayList<ModelKey> modelParameterKeys;
-
     public KeyboardConfiguration() {
-        this.keyboardHeight     = 100;
-        this.nbLine             = 2;
-        this.nbRow              = 2;
-        this.selectedLanguage   = 0;
-        this.keyboardLanguages  = new ArrayList<>();
-        this.modelKeyboardKeys  = new ArrayList<>();
-        this.modelParameterKeys = new ArrayList<>();
+        this.bottomKeyboardHeight   = 100;
+        this.bottomKeyboardNbLine   = 2;
+        this.bottomKeyboardNbRow    = 2;
+        this.modelBottomKeys        = new ArrayList<>();
+
+        this.topKeyboardHeight      = 100;
+        this.topKeyboardNbLine      = 2;
+        this.topKeyboardNbRow       = 2;
+        this.modelTopKeys           = new ArrayList<>();
+
+        this.selectedLanguage       = 0;
+        this.keyboardLanguages      = new ArrayList<>();
 
         this.keyboardLanguages.add("Default");
     }
@@ -64,28 +78,68 @@ public class KeyboardConfiguration implements Serializable {
      * All the getter and setter of the KeyboardConfiguration
      */
 
-    public int getKeyboardHeight() {
-        return keyboardHeight;
+    public int getBottomKeyboardHeight() {
+        return bottomKeyboardHeight;
     }
 
-    public void setKeyboardHeight(int keyboardHeight) {
-        this.keyboardHeight = keyboardHeight;
+    public void setBottomKeyboardHeight(int bottomKeyboardHeight) {
+        this.bottomKeyboardHeight = bottomKeyboardHeight;
     }
 
-    public int getNbLine() {
-        return nbLine;
+    public int getBottomKeyboardNbLine() {
+        return bottomKeyboardNbLine;
     }
 
-    public void setNbLine(int nbLine) {
-        this.nbLine = nbLine;
+    public void setBottomKeyboardNbLine(int bottomKeyboardNbLine) {
+        this.bottomKeyboardNbLine = bottomKeyboardNbLine;
     }
 
-    public int getNbRow() {
-        return nbRow;
+    public int getBottomKeyboardNbRow() {
+        return bottomKeyboardNbRow;
     }
 
-    public void setNbRow(int nbRow) {
-        this.nbRow = nbRow;
+    public void setBottomKeyboardNbRow(int bottomKeyboardNbRow) {
+        this.bottomKeyboardNbRow = bottomKeyboardNbRow;
+    }
+
+    public ArrayList<ModelKey> getModelBottomKeys() {
+        return modelBottomKeys;
+    }
+
+    public void setModelBottomKeys(ArrayList<ModelKey> modelBottomKeys) {
+        this.modelBottomKeys = modelBottomKeys;
+    }
+
+    public int getTopKeyboardHeight() {
+        return topKeyboardHeight;
+    }
+
+    public void setTopKeyboardHeight(int topKeyboardHeight) {
+        this.topKeyboardHeight = topKeyboardHeight;
+    }
+
+    public int getTopKeyboardNbLine() {
+        return topKeyboardNbLine;
+    }
+
+    public void setTopKeyboardNbLine(int topKeyboardNbLine) {
+        this.topKeyboardNbLine = topKeyboardNbLine;
+    }
+
+    public int getTopKeyboardNbRow() {
+        return topKeyboardNbRow;
+    }
+
+    public void setTopKeyboardNbRow(int topKeyboardNbRow) {
+        this.topKeyboardNbRow = topKeyboardNbRow;
+    }
+
+    public ArrayList<ModelKey> getModelTopKeys() {
+        return modelTopKeys;
+    }
+
+    public void setModelTopKeys(ArrayList<ModelKey> modelTopKeys) {
+        this.modelTopKeys = modelTopKeys;
     }
 
     public int getSelectedLanguage() {
@@ -94,22 +148,6 @@ public class KeyboardConfiguration implements Serializable {
 
     public void setSelectedLanguage(int selectedLanguage) {
         this.selectedLanguage = selectedLanguage;
-    }
-
-    public ArrayList<ModelKey> getModelKeyboardKeys() {
-        return modelKeyboardKeys;
-    }
-
-    public void setModelKeyboardKeys(ArrayList<ModelKey> modelKeyboardKeys) {
-        this.modelKeyboardKeys = modelKeyboardKeys;
-    }
-
-    public ArrayList<ModelKey> getModelParameterKeys() {
-        return modelParameterKeys;
-    }
-
-    public void setModelParameterKeys(ArrayList<ModelKey> modelParameterKeys) {
-        this.modelParameterKeys = modelParameterKeys;
     }
 
     public ArrayList<String> getKeyboardLanguages() {

@@ -54,7 +54,7 @@ public class StepKeyboardPage {
         listLineKeyList =new ArrayList<>();
 
         keyboardPageLayout = (LinearLayout) view.findViewById(R.id.keyboardPageLayout);
-        keyboardPageLayout.setWeightSum(DataStore.getInstance().getKeyboardConfiguration().getNbLine());
+        keyboardPageLayout.setWeightSum(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine());
 
         addLine();
 
@@ -78,7 +78,7 @@ public class StepKeyboardPage {
     public boolean addLineAndKey(ModelKey modelKey, IKeyInterface iKeyInterface){
         CustomKeyLineLayout newLine = new CustomKeyLineLayout(this.application,this.application);
 
-        if(DataStore.getInstance().getKeyboardConfiguration().getNbLine()==listLineKeyList.size()){
+        if(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine()==listLineKeyList.size()){
             return false;
         }else{
             newLine.addKeyboardKey(modelKey, iKeyInterface);

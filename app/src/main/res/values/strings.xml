@@ -9,6 +9,8 @@
     <string name="main_activity_word_to_add_hint">Tap a word</string>
     <string name="main_activity_text_size">Text size : </string>
     <string name="main_activity_text_size_hint">Tap text size</string>
+    <string name="main_activity_bottom_keyboard">BOTTOM KEYBOARD</string>
+    <string name="main_activity_top_keyboard">TOP KEYBOARD</string>
     <string name="main_activity_nb_line">Line number : </string>
     <string name="main_activity_nb_line_hint">Tap line number</string>
     <string name="main_activity_nb_row">Row number : </string>
@@ -19,8 +21,8 @@
     <string name="main_activity_button_launch_configuration">Launch configuration</string>
     <string name="main_activity_button_add_word">Add the word</string>
     <string name="main_activity_button_add_parameter_key">Add fixed key</string>
-    <string name="main_activity_button_edit_keyboard_keys_language">Edit non fixed keys language</string>
-    <string name="main_activity_button_edit_fixed_keys_language">Edit fixed keys language</string>
+    <string name="main_activity_button_edit_bottom_keys_language">Edit bottom keys</string>
+    <string name="main_activity_button_edit_top_keys_language">Edit top keys</string>
     <string name="main_activity_button_delete_all_keys">Delete all keys</string>
     <string name="main_activity_button_import_word">Import word</string>
     <string name="main_activity_button_choose_keyboard">Choose keyboard</string>

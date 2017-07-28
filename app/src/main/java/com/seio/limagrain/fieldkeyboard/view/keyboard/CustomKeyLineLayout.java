@@ -55,7 +55,7 @@ public class CustomKeyLineLayout extends LinearLayout{
         params.height = 0;
 
         this.setLayoutParams(params);
-        this.setWeightSum(DataStore.getInstance().getKeyboardConfiguration().getNbRow());
+        this.setWeightSum(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbRow());
 
         this.setGravity(Gravity.START);
         this.setOrientation(LinearLayout.HORIZONTAL);
@@ -72,10 +72,10 @@ public class CustomKeyLineLayout extends LinearLayout{
      * @return if the line is full
      */
     public boolean addKeyboardKey(ModelKey modelKey, IKeyInterface iKeyInterface){
-        if(listCustomKeyView.size()==DataStore.getInstance().getKeyboardConfiguration().getNbRow()){
+        if(listCustomKeyView.size()==DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbRow()){
             return false;
         }else{
-            CustomKeyView newCustomKeyView = new CustomKeyView(getApplication(),DataStore.KEY_TYPE_KEYBOARD,modelKey,DataStore.getInstance().getViewKeyboardKeys().size(),iKeyInterface);
+            CustomKeyView newCustomKeyView = new CustomKeyView(getApplication(),DataStore.KEY_TYPE_BOTTOM,modelKey,DataStore.getInstance().getViewKeyboardKeys().size(),iKeyInterface);
             listCustomKeyView.add(newCustomKeyView);
             newCustomKeyView.setVisibility(View.INVISIBLE);
             ViewUtils.makeViewVisible(getApplication(), newCustomKeyView);

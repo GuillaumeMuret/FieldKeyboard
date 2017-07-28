@@ -93,11 +93,11 @@ public class FileUtils {
      * @return if the keyboard has an error
      */
     private static boolean isErrorKeyboard(KeyboardConfiguration keyboardConfiguration){
-        for(int i=0;i<keyboardConfiguration.getModelKeyboardKeys().size();i++){
-            if(keyboardConfiguration.getModelKeyboardKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
+        for(int i = 0; i<keyboardConfiguration.getModelBottomKeys().size(); i++){
+            if(keyboardConfiguration.getModelBottomKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
                 return true;
             }
-            if(keyboardConfiguration.getModelParameterKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
+            if(keyboardConfiguration.getModelTopKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
                 return true;
             }
         }
@@ -111,8 +111,8 @@ public class FileUtils {
      */
     static void manageDataActualization(KeyboardConfiguration keyboardConfiguration){
         if(    keyboardConfiguration.getKeyboardLanguages()==null
-            || keyboardConfiguration.getModelKeyboardKeys()==null
-            || keyboardConfiguration.getModelParameterKeys()==null
+            || keyboardConfiguration.getModelBottomKeys()==null
+            || keyboardConfiguration.getModelTopKeys()==null
                 ) {
             reinitKeyboard();
         }else{

@@ -15,23 +15,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/custom_keyboard_background"
             android:orientation="horizontal"
             >
 
             <TextView
-                android:layout_width="@dimen/activity_home_text_view_size"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/activity_home_text_view_font_size"
-                android:text="@string/main_activity_word_to_add"
-                />
-
-            <EditText
-                android:id="@+id/etWord"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/activity_home_text_view_font_size"
-                android:hint="@string/main_activity_word_to_add_hint"
+                android:text="@string/main_activity_bottom_keyboard"
                 />
 
         </LinearLayout>
@@ -51,7 +44,7 @@
                 />
 
             <EditText
-                android:id="@+id/nbLine"
+                android:id="@+id/bottomKeyboardNbLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/activity_home_text_view_font_size"
@@ -75,7 +68,7 @@
                 android:text="@string/main_activity_nb_row"
                 />
             <EditText
-                android:id="@+id/nbRow"
+                android:id="@+id/bottomKeyboardNbRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/activity_home_text_view_font_size"
@@ -100,7 +93,96 @@
                 />
 
             <EditText
-                android:id="@+id/sizeKeyboard"
+                android:id="@+id/bottomSizeKeyboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:inputType="number"
+                android:hint="@string/main_activity_keyboard_height_hint" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/custom_keyboard_background"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:text="@string/main_activity_top_keyboard"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="@dimen/activity_home_text_view_size"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:text="@string/main_activity_nb_line"
+                />
+
+            <EditText
+                android:id="@+id/topKeyboardNbLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:inputType="number"
+                android:hint="@string/main_activity_nb_line_hint"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="@dimen/activity_home_text_view_size"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:text="@string/main_activity_nb_row"
+                />
+            <EditText
+                android:id="@+id/topKeyboardNbRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:hint="@string/main_activity_nb_row_hint"
+                android:inputType="number"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="@dimen/activity_home_text_view_size"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/activity_home_text_view_font_size"
+                android:text="@string/main_activity_keyboard_height"
+                />
+
+            <EditText
+                android:id="@+id/topSizeKeyboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/activity_home_text_view_font_size"
@@ -137,63 +219,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btAddWord"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_home_button_text_view_margin"
-            android:background="@drawable/selector_activity_home_button"
-            android:orientation="horizontal"
-            >
-
-            <ImageView
-                android:layout_width="@dimen/activity_home_button_size"
-                android:layout_height="@dimen/activity_home_button_size"
-                android:padding="@dimen/activity_home_button_padding"
-                android:src="@drawable/ic_add"
-                />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/activity_home_button_text_view_font_size"
-                android:padding="@dimen/activity_home_button_text_view_padding"
-                android:text="@string/main_activity_button_add_word"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btAddParameterKey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_home_button_text_view_margin"
-            android:background="@drawable/selector_activity_home_button"
-            android:orientation="horizontal"
-            >
-
-            <ImageView
-                android:layout_width="@dimen/activity_home_button_size"
-                android:layout_height="@dimen/activity_home_button_size"
-                android:padding="@dimen/activity_home_button_padding"
-                android:src="@drawable/ic_add_parameter_key"
-                />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/activity_home_button_text_view_font_size"
-                android:padding="@dimen/activity_home_button_text_view_padding"
-                android:text="@string/main_activity_button_add_parameter_key"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btEditKeyboardKeysLanguage"
+            android:id="@+id/btEditBottomKeysLanguage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_home_button_text_view_margin"
@@ -215,13 +241,13 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/activity_home_button_text_view_font_size"
                 android:padding="@dimen/activity_home_button_text_view_padding"
-                android:text="@string/main_activity_button_edit_keyboard_keys_language"
+                android:text="@string/main_activity_button_edit_bottom_keys_language"
                 />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btEditFixedKeysLanguage"
+            android:id="@+id/btEditTopKeysLanguage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_home_button_text_view_margin"
@@ -243,7 +269,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/activity_home_button_text_view_font_size"
                 android:padding="@dimen/activity_home_button_text_view_padding"
-                android:text="@string/main_activity_button_edit_fixed_keys_language"
+                android:text="@string/main_activity_button_edit_top_keys_language"
                 />
 
         </LinearLayout>

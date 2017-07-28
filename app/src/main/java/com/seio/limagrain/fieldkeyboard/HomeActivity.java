@@ -69,18 +69,19 @@ public class HomeActivity extends AppCompatActivity {
     private LinearLayout llIconView;
 
     // The edit text of the activity
-    private EditText etWord;
-    private EditText etNbLine;
-    private EditText etNbRow;
-    private EditText etSizeKeyboard;
+    private EditText etBottomNbLine;
+    private EditText etBottomNbRow;
+    private EditText etBottomSizeKeyboard;
+
+    private EditText etTopNbLine;
+    private EditText etTopNbRow;
+    private EditText etTopSizeKeyboard;
 
     // The button of the activity
     private View btLaunchConfig;
-    private View btAddWord;
-    private View btAddParameterKey;
+    private View btEditBottomKeys;
+    private View btEditTopKeys;
     private View btImportKeyboard;
-    private View btEditKeyboardKeysLanguage;
-    private View btEditFixedKeysLanguage;
     private View btRemoveAllKeys;
     private View btImportWord;
     private View btShowInputMethodPicker;
@@ -93,15 +94,17 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // Instantiate the view
-        etWord = (EditText)findViewById(R.id.etWord);
-        etNbLine = (EditText)findViewById(R.id.nbLine);
-        etNbRow = (EditText)findViewById(R.id.nbRow);
-        etSizeKeyboard = (EditText)findViewById(R.id.sizeKeyboard);
+        etBottomNbLine = (EditText)findViewById(R.id.bottomKeyboardNbLine);
+        etBottomNbRow = (EditText)findViewById(R.id.bottomKeyboardNbRow);
+        etBottomSizeKeyboard = (EditText)findViewById(R.id.bottomSizeKeyboard);
+
+        etTopNbLine = (EditText)findViewById(R.id.topKeyboardNbLine);
+        etTopNbRow = (EditText)findViewById(R.id.topKeyboardNbRow);
+        etTopSizeKeyboard = (EditText)findViewById(R.id.topSizeKeyboard);
+
         btLaunchConfig = findViewById(R.id.buttonLaunchConfig);
-        btAddWord = findViewById(R.id.btAddWord);
-        btAddParameterKey = findViewById(R.id.btAddParameterKey);
-        btEditKeyboardKeysLanguage = findViewById(R.id.btEditKeyboardKeysLanguage);
-        btEditFixedKeysLanguage = findViewById(R.id.btEditFixedKeysLanguage);
+        btEditBottomKeys = findViewById(R.id.btEditBottomKeysLanguage);
+        btEditTopKeys = findViewById(R.id.btEditTopKeysLanguage);
         btRemoveAllKeys = findViewById(R.id.btRemoveAllWord);
         btImportWord = findViewById(R.id.btImportWord);
         btImportKeyboard = findViewById(R.id.btImportKeyboard);
@@ -109,9 +112,6 @@ public class HomeActivity extends AppCompatActivity {
 
         // init the listeners
         initListeners();
-
-        // init dialogs
-        initDialogParameterKeys();
 
         // init custom keyboard
         initCustomKeyboard();
@@ -167,34 +167,20 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        btAddWord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNewKeyboardKey(new ModelKey(etWord.getText().toString(), Color.WHITE, Color.BLACK,DataStore.DEFAULT_KEY_TEXT_SIZE,DataStore.ACTION_SIMPLE_KEY,-1));
-            }
-        });
-
-        btAddParameterKey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customParameterKeyDialog.show();
-            }
-        });
-
-        btEditKeyboardKeysLanguage.setOnClickListener(new View.OnClickListener() {
+        btEditBottomKeys.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EditLanguageActivity.class);
-                intent.putExtra(DataStore.KEY_TYPE, DataStore.KEY_TYPE_KEYBOARD);
+                intent.putExtra(DataStore.KEY_TYPE, DataStore.KEY_TYPE_BOTTOM);
                 startActivity(intent);
             }
         });
 
-        btEditFixedKeysLanguage.setOnClickListener(new View.OnClickListener() {
+        btEditTopKeys.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EditLanguageActivity.class);
-                intent.putExtra(DataStore.KEY_TYPE, DataStore.KEY_TYPE_PARAMETER);
+                intent.putExtra(DataStore.KEY_TYPE, DataStore.KEY_TYPE_TOP);
                 startActivity(intent);
             }
         });
@@ -205,20 +191,26 @@ public class HomeActivity extends AppCompatActivity {
      * @throws FieldKeyboardException : user entry exception
      */
     private void verifyUserEntry() throws FieldKeyboardException{
-        isIntegerField(etSizeKeyboard.getText().toString());
-        isIntegerField(etNbLine.getText().toString());
-        isIntegerField(etNbRow.getText().toString());
+        isIntegerField(etBottomSizeKeyboard.getText().toString());
+        isIntegerField(etBottomNbLine.getText().toString());
+        isIntegerField(etBottomNbRow.getText().toString());
+
+        isIntegerField(etTopSizeKeyboard.getText().toString());
+        isIntegerField(etTopNbLine.getText().toString());
+        isIntegerField(etTopNbRow.getText().toString());
     }
 
     /**
      * Process called to set the keyboard entry (after verification)
      */
     private void setKeyboardEntry(){
-        KeyboardConfiguration keyboardConfiguration = DataStore.getInstance().getKeyboardConfiguration();
-        keyboardConfiguration.setKeyboardHeight(Integer.valueOf(etSizeKeyboard.getText().toString()));
-        keyboardConfiguration.setNbLine(Integer.valueOf(etNbLine.getText().toString()));
-        keyboardConfiguration.setNbRow(Integer.valueOf(etNbRow.getText().toString()));
-        DataStore.getInstance().setKeyboardConfiguration(keyboardConfiguration);
+        DataStore.getInstance().getKeyboardConfiguration().setBottomKeyboardHeight(Integer.valueOf(etBottomSizeKeyboard.getText().toString()));
+        DataStore.getInstance().getKeyboardConfiguration().setBottomKeyboardNbLine(Integer.valueOf(etBottomNbLine.getText().toString()));
+        DataStore.getInstance().getKeyboardConfiguration().setBottomKeyboardNbRow(Integer.valueOf(etBottomNbRow.getText().toString()));
+
+        DataStore.getInstance().getKeyboardConfiguration().setTopKeyboardHeight(Integer.valueOf(etTopSizeKeyboard.getText().toString()));
+        DataStore.getInstance().getKeyboardConfiguration().setTopKeyboardNbLine(Integer.valueOf(etTopNbLine.getText().toString()));
+        DataStore.getInstance().getKeyboardConfiguration().setTopKeyboardNbRow(Integer.valueOf(etTopNbRow.getText().toString()));
     }
 
     /**
@@ -247,26 +239,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Process called to add a new keyboard key to the keyboard
-     * @param newKey : the new key to add
-     */
-    private void addNewKeyboardKey(ModelKey newKey){
-        for(int i=1;i<DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size();i++){
-            newKey.getKeyLanguages().add(this.getResources().getString(R.string.edit_language_todo));
-        }
-        if(!newKey.getKeyLanguages().get(0).isEmpty()){
-            DataStore.getInstance().getKeyboardConfiguration().getModelKeyboardKeys().add(newKey);
-            if (DataStore.getInstance().getFieldKeyboard() != null) {
-                DataStore.getInstance().getFieldKeyboard().addKeyboardKeyView(newKey);
-            }
-            Toast.makeText(this,getResources().getString(R.string.info_message_word_added),Toast.LENGTH_SHORT).show();
-            saveKeyboardConfiguration();
-        }else{
-            Toast.makeText(this,getResources().getString(R.string.error_message_empty_field_add_word),Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /**
      * Process called to add a new fixed key to the keyboard
      */
     private void addNewParameterKey(){
@@ -284,9 +256,9 @@ public class HomeActivity extends AppCompatActivity {
             parameterKey = new ModelKey("", Color.WHITE, Color.BLACK,DataStore.DEFAULT_KEY_ICON_SIZE,(String)spAction.getSelectedItem(),selectedItem);
         }
 
-        DataStore.getInstance().getKeyboardConfiguration().getModelParameterKeys().add(parameterKey);
+        DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().add(parameterKey);
         if (DataStore.getInstance().getFieldKeyboard() != null) {
-            DataStore.getInstance().getFieldKeyboard().addParameterKeyView(parameterKey);
+            DataStore.getInstance().getFieldKeyboard().addTopKeyboardKeyView(parameterKey);
         }
 
         Toast.makeText(this,getResources().getString(R.string.info_message_param_key_added),Toast.LENGTH_SHORT).show();
@@ -311,12 +283,13 @@ public class HomeActivity extends AppCompatActivity {
     private void initCustomKeyboard(){
         if(PermissionUtils.checkStoragePermissions(this)) {
             FileUtils.loadKeyboardConfiguration();
-            if(DataStore.getInstance().getKeyboardConfiguration()!=null){
+            etBottomSizeKeyboard.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardHeight()));
+            etBottomNbLine.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine()));
+            etBottomNbRow.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbRow()));
 
-                etSizeKeyboard.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getKeyboardHeight()));
-                etNbLine.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getNbLine()));
-                etNbRow.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getNbRow()));
-            }
+            etTopSizeKeyboard.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardHeight()));
+            etTopNbLine.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbLine()));
+            etTopNbRow.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbRow()));
         }
     }
 
@@ -358,6 +331,7 @@ public class HomeActivity extends AppCompatActivity {
      * Called to know if the parameter key is valid or not
      * @return if the parameter key is valid
      */
+    /*
     private boolean isValidParameterKey(){
         if(spAction.getSelectedItemPosition()>0){
             if(icCheckboxText.isSelected()&&etParamKeyWord.getText().toString().length()!=0
@@ -368,6 +342,7 @@ public class HomeActivity extends AppCompatActivity {
         }
         return false;
     }
+    */
 
     /**
      * Process called to show the warning dialog to overwrite the current configuration
@@ -398,6 +373,7 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Process called to init the dialog to add a new parameter key (fixed key)
      */
+    // TODO
     private void initDialogParameterKeys(){
         customParameterKeyDialog = new MaterialDialog.Builder(this)
                 .title(R.string.main_activity_dialog_parameter_key_title)
@@ -409,11 +385,11 @@ public class HomeActivity extends AppCompatActivity {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        if(isValidParameterKey()){
+                        /*if(isValidParameterKey()){
                             addNewParameterKey();
                         }else{
                             Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_wrong_parameter_key),Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -516,7 +492,7 @@ public class HomeActivity extends AppCompatActivity {
                         for(int j=1;j<DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size();j++){
                             modelKey.getKeyLanguages().add(getResources().getString(R.string.edit_language_todo));
                         }
-                        DataStore.getInstance().getKeyboardConfiguration().getModelKeyboardKeys().add(modelKey);
+                        DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().add(modelKey);
                     }
                     if(DataStore.getInstance().getFieldKeyboard()!=null){
                         DataStore.getInstance().getFieldKeyboard().applyKeyboardConfiguration();
