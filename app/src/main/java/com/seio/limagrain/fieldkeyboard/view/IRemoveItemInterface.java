@@ -20,11 +20,11 @@
  */
 package com.seio.limagrain.fieldkeyboard.view;
 
-import android.widget.EditText;
+import fr.ganfra.materialspinner.MaterialSpinner;
 
 public interface IRemoveItemInterface {
 
     // Called when the user click on the button remove of the EditLanguageActivity :
     // First item of the default language
-    void onClickRemoveItem(EditText etItem);
+    void onClickRemoveItem(MaterialSpinner materialSpinner);
 }

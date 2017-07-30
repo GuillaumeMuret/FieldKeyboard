@@ -108,25 +108,25 @@ public class DataStore {
         this.tmpKeyboardConfiguration = keyboardConfiguration;
     }
 
-    /** Object ==> List Of Item Displayed on keyboard **/
-    private ArrayList<CustomKeyView> viewKeyboardKeys;
+    /** Object ==> List Of Item Displayed on bottom **/
+    private ArrayList<CustomKeyView> viewBottomKeys;
 
-    public ArrayList<CustomKeyView> getViewKeyboardKeys() {
-        return viewKeyboardKeys==null ? new ArrayList<CustomKeyView>() : viewKeyboardKeys;
+    public ArrayList<CustomKeyView> getViewBottomKeys() {
+        return viewBottomKeys ==null ? new ArrayList<CustomKeyView>() : viewBottomKeys;
     }
 
-    public void setViewKeyboardKeys(ArrayList<CustomKeyView> viewKeyboardKeys) {
-        this.viewKeyboardKeys = viewKeyboardKeys;
+    public void setViewBottomKeys(ArrayList<CustomKeyView> viewBottomKeys) {
+        this.viewBottomKeys = viewBottomKeys;
     }
 
-    /** Object ==> List Of Item Displayed on parameter line**/
-    private ArrayList<CustomKeyView> viewParameterKeys;
+    /** Object ==> List Of Item Displayed on top **/
+    private ArrayList<CustomKeyView> viewTopKeys;
 
-    public ArrayList<CustomKeyView> getViewParameterKeys() {
-        return viewParameterKeys==null ? new ArrayList<CustomKeyView>() : viewParameterKeys;
+    public ArrayList<CustomKeyView> getViewTopKeys() {
+        return viewTopKeys ==null ? new ArrayList<CustomKeyView>() : viewTopKeys;
     }
 
-    public void setViewParameterKeys(ArrayList<CustomKeyView> viewParameterKeys) {
-        this.viewParameterKeys = viewParameterKeys;
+    public void setViewTopKeys(ArrayList<CustomKeyView> viewTopKeys) {
+        this.viewTopKeys = viewTopKeys;
     }
 }

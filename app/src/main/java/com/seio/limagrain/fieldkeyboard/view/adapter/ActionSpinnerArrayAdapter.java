@@ -18,20 +18,21 @@
  *  au profit de SEIO autre que celle mentionnée dans l’article 5 de la présente Convention. SEIO
  *  se réserve le droit d'utiliser le nom et le logo du client à titre de référence.
  */
-package com.seio.limagrain.fieldkeyboard.view;
+package com.seio.limagrain.fieldkeyboard.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.seio.limagrain.fieldkeyboard.R;
 
 import java.util.List;
 
-public class SpinnerArrayAdapter extends ArrayAdapter<String> {
+public class ActionSpinnerArrayAdapter extends ArrayAdapter<String> {
 
     // Context of the activity
     public Context context;
@@ -42,7 +43,7 @@ public class SpinnerArrayAdapter extends ArrayAdapter<String> {
      * @param resource : the resources of the app
      * @param objects : the list of item to display
      */
-    public SpinnerArrayAdapter(Context context, int resource, List<String> objects) {
+    public ActionSpinnerArrayAdapter(Context context, int resource, List<String> objects) {
         super(context, resource, objects);
         this.context=context;
     }

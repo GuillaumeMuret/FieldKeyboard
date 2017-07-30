@@ -28,6 +28,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.itextpdf.text.pdf.PdfReader;
@@ -83,6 +84,7 @@ public class FileUtils {
      * Process called to reinit the keyboard after an error or when no data found
      */
     private static void reinitKeyboard(){
+        Log.d(DataStore.TAG,"reinitKeyboard ERROR");
         DataStore.getInstance().setKeyboardConfiguration(new KeyboardConfiguration());
         saveKeyboardConfiguration();
     }
@@ -94,11 +96,17 @@ public class FileUtils {
      */
     private static boolean isErrorKeyboard(KeyboardConfiguration keyboardConfiguration){
         for(int i = 0; i<keyboardConfiguration.getModelBottomKeys().size(); i++){
-            if(keyboardConfiguration.getModelBottomKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
-                return true;
+            if(keyboardConfiguration.getModelBottomKeys().size()>0) {
+                if (keyboardConfiguration.getModelBottomKeys().get(i).getKeyLanguages().size() != keyboardConfiguration.getKeyboardLanguages().size()) {
+                    Log.d(DataStore.TAG, "getModelBottomKeys ERROR => " + i);
+                    return true;
+                }
             }
-            if(keyboardConfiguration.getModelTopKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
-                return true;
+            if(keyboardConfiguration.getModelTopKeys().size()>0){
+                if(keyboardConfiguration.getModelTopKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
+                    Log.d(DataStore.TAG,"getModelTopKeys ERROR => "+i);
+                    return true;
+                }
             }
         }
         return false;
@@ -114,6 +122,7 @@ public class FileUtils {
             || keyboardConfiguration.getModelBottomKeys()==null
             || keyboardConfiguration.getModelTopKeys()==null
                 ) {
+            Log.d(DataStore.TAG,"manageDataActualization ERROR");
             reinitKeyboard();
         }else{
             if(isErrorKeyboard(keyboardConfiguration)) {
@@ -156,13 +165,16 @@ public class FileUtils {
         try {
             DataStore.getInstance().setKeyboardConfiguration(gson.fromJson(new FileReader(keyboardConfigFile), KeyboardConfiguration.class));
             if(DataStore.getInstance().getKeyboardConfiguration()==null){
+                Log.d(DataStore.TAG,"getKeyboardConfiguration()==null shit !");
                 reinitKeyboard();
             }else{
                 manageDataActualization(DataStore.getInstance().getKeyboardConfiguration());
             }
         } catch (FileNotFoundException e) {
+            Log.e(DataStore.TAG,"getKeyboardConfiguration()==null shit !",e);
             reinitKeyboard();
         } catch(Exception e){
+            Log.e(DataStore.TAG,"getKeyboardConfiguration()==null shit !",e);
             reinitKeyboard();
         }
     }

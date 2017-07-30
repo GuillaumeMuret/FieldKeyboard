@@ -36,6 +36,9 @@ import com.seio.limagrain.fieldkeyboard.R;
 import com.seio.limagrain.fieldkeyboard.model.DataStore;
 import com.seio.limagrain.fieldkeyboard.view.keyboard.CustomKeyView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ViewUtils {
 
     /**
@@ -168,6 +171,58 @@ public class ViewUtils {
             }
         });
         llIconView.addView(imageView);
+    }
+
+    private static ImageView addNewImageFromResource(Context context,final int imageResources){
+        final ImageView imageView = new ImageView(context);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                (int)context.getResources().getDimension(R.dimen.main_activity_dialog_icon_size),
+                (int)context.getResources().getDimension(R.dimen.main_activity_dialog_icon_size)
+        );
+        int margin = (int)context.getResources().getDimension(R.dimen.main_activity_dialog_icon_margin);
+        params.setMargins(margin,margin,margin,margin);
+        imageView.setLayoutParams(params);
+        imageView.setImageResource(imageResources);
+        return imageView;
+    }
+
+    public static List<ImageView> getIconList(Context context){
+        ArrayList<ImageView> iconList = new ArrayList<>();
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_checkbox));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+        return iconList;
     }
 
     /**

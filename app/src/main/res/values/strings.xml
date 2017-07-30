@@ -70,6 +70,8 @@
     <!-- Edit Language activity -->
     <string name="new_language">New Language</string>
     <string name="edit_language_todo">Todo</string>
+    <string name="edit_language_key_action">Key Action</string>
+    <string name="edit_language_key_icon">Key Icon</string>
     <string name="edit_language_dialog_save_all_keys_title">Exit</string>
     <string name="edit_language_dialog_save_all_keys_content">Save the keyboard configuration and quit ?</string>
 

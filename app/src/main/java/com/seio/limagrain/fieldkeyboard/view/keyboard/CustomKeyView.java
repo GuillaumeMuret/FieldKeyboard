@@ -96,7 +96,7 @@ public class CustomKeyView extends LinearLayout {
         keyParams.gravity= Gravity.CENTER;
 
         // In this case -> key is just text
-        if(modelKey.getKeyIcon()==-1){
+        if(modelKey.getKeyIcon()==0){
             this.myTextView=new TextView(context);
             this.myTextView.setText(modelKey.getKeyLanguages().get(0));
             this.myTextView.setTextSize(modelKey.getKeyFrontSize());

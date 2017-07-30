@@ -42,7 +42,7 @@ import com.seio.limagrain.fieldkeyboard.model.ModelKey;
 import com.seio.limagrain.fieldkeyboard.utils.PermissionUtils;
 import com.seio.limagrain.fieldkeyboard.utils.ViewUtils;
 import com.seio.limagrain.fieldkeyboard.utils.file.FileUtils;
-import com.seio.limagrain.fieldkeyboard.view.SpinnerArrayAdapter;
+import com.seio.limagrain.fieldkeyboard.view.adapter.ActionSpinnerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -413,7 +413,7 @@ public class HomeActivity extends AppCompatActivity {
         // Initializing a String Array
         String[] actions = this.getResources().getStringArray(R.array.item_actions_array);
         final List<String> actionsList = new ArrayList<>(Arrays.asList(actions));
-        ArrayAdapter<String> actionAdapter = new SpinnerArrayAdapter(this,R.layout.spinner_item,actionsList);
+        ArrayAdapter<String> actionAdapter = new ActionSpinnerArrayAdapter(this,R.layout.spinner_item,actionsList);
 
         actionAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spAction.setAdapter(actionAdapter);
@@ -488,7 +488,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     ArrayList<String> listNewWord = FileUtils.getListWordFromFile(FileUtils.getUploadTextFile(getApplicationContext(),data.getData()));
                     for(int i=0;i<listNewWord.size();i++){
-                        ModelKey modelKey = new ModelKey(listNewWord.get(i), Color.WHITE, Color.BLACK,DataStore.DEFAULT_KEY_TEXT_SIZE,DataStore.ACTION_SIMPLE_KEY,-1);
+                        ModelKey modelKey = new ModelKey(listNewWord.get(i), Color.WHITE, Color.BLACK,DataStore.DEFAULT_KEY_TEXT_SIZE,DataStore.ACTION_SIMPLE_KEY,0);
                         for(int j=1;j<DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().size();j++){
                             modelKey.getKeyLanguages().add(getResources().getString(R.string.edit_language_todo));
                         }

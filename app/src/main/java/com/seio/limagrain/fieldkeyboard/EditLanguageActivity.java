@@ -30,6 +30,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -41,9 +42,13 @@ import com.seio.limagrain.fieldkeyboard.utils.DimUtils;
 import com.seio.limagrain.fieldkeyboard.utils.PermissionUtils;
 import com.seio.limagrain.fieldkeyboard.utils.file.FileUtils;
 import com.seio.limagrain.fieldkeyboard.view.IRemoveItemInterface;
-import com.seio.limagrain.fieldkeyboard.view.WordLanguageListAdapter;
+import com.seio.limagrain.fieldkeyboard.view.adapter.ActionListAdapter;
+import com.seio.limagrain.fieldkeyboard.view.adapter.IconListAdapter;
+import com.seio.limagrain.fieldkeyboard.view.adapter.WordLanguageListAdapter;
 
 import java.util.ArrayList;
+
+import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class EditLanguageActivity extends AppCompatActivity implements IRemoveItemInterface{
 
@@ -63,8 +68,10 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
     // Button for saving language
     private View btSaveLanguage;
 
-    // The list of all the language adapter
+    // The list of all the adapters
     private ArrayList<WordLanguageListAdapter> listLanguageAdapter;
+    private ActionListAdapter keyActionAdapter;
+    private IconListAdapter keyIconAdapter;
 
     // List of all the language name
     private ArrayList<EditText> listLanguageName;
@@ -117,6 +124,125 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         });
     }
 
+    private void initLayoutAction(){
+        int margin = DimUtils.dipToPixel(this,4);
+        int padding = DimUtils.dipToPixel(this,2);
+
+        // Init recycler view
+        RecyclerView recyclerView = new RecyclerView(this);
+        LinearLayoutManager llm = new LinearLayoutManager(this){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+        // Set adapter of the recycler list
+        keyActionAdapter = new ActionListAdapter(keyType,this,this);
+        recyclerView.setAdapter(keyActionAdapter);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setLayoutParams(params);
+        recyclerView.setPadding(padding,padding,padding,padding);
+        recyclerView.setNestedScrollingEnabled(false);
+
+        // Init title
+        TextView textView = new TextView(this);
+        textView.setText(this.getResources().getString(R.string.edit_language_key_action));
+        textView.setTextSize( (int) this.getResources().getDimension(R.dimen.activity_edit_language_text_font_size));
+        textView.setTextColor(this.getResources().getColor(R.color.colorWhite));
+        textView.setBackground(this.getResources().getDrawable(R.drawable.rect_red_1));
+        textView.setLayoutParams(params);
+        textView.setPadding(padding,padding,padding,padding);
+
+        // Invisible icon remove language (for same space)
+        ImageView iconRemoveLanguage = new ImageView(this);
+        iconRemoveLanguage.setImageResource(R.drawable.ic_remove_language);
+        iconRemoveLanguage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)this.getResources().getDimension(R.dimen.activity_edit_language_icon_size)));
+        iconRemoveLanguage.setBackground(getResources().getDrawable(R.drawable.selector_attach_keyboard));
+        iconRemoveLanguage.setVisibility(View.INVISIBLE);
+
+        // Init icon add word
+        ImageView iconAddWord = new ImageView(this);
+        iconAddWord.setImageResource(R.drawable.ic_add);
+        iconAddWord.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)this.getResources().getDimension(R.dimen.activity_edit_language_icon_size)));
+        iconAddWord.setBackground(getResources().getDrawable(R.drawable.selector_attach_keyboard));
+        iconAddWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewWord();
+            }
+        });
+
+        // Init layout for the title and content
+        LinearLayout llLanguageViewIconAndTitleAndContent = new LinearLayout(this);
+        llLanguageViewIconAndTitleAndContent.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams llLanguageViewTitleAndContentParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        llLanguageViewTitleAndContentParam.setMargins(margin,margin,margin,margin);
+        llLanguageViewIconAndTitleAndContent.setLayoutParams(llLanguageViewTitleAndContentParam);
+
+        llLanguageViewIconAndTitleAndContent.addView(iconRemoveLanguage);
+        llLanguageViewIconAndTitleAndContent.addView(textView);
+        llLanguageViewIconAndTitleAndContent.addView(recyclerView);
+        llLanguageViewIconAndTitleAndContent.addView(iconAddWord);
+        llLanguageLayout.addView(llLanguageViewIconAndTitleAndContent);
+    }
+
+    private void initLayoutIcon(){
+        int margin = DimUtils.dipToPixel(this,4);
+        int padding = DimUtils.dipToPixel(this,2);
+
+        // Init recycler view
+        RecyclerView recyclerView = new RecyclerView(this);
+        LinearLayoutManager llm = new LinearLayoutManager(this){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+        // Set adapter of the recycler list
+        keyIconAdapter = new IconListAdapter(keyType,this);
+        recyclerView.setAdapter(keyIconAdapter);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setLayoutParams(params);
+        recyclerView.setPadding(padding,padding,padding,padding);
+        recyclerView.setNestedScrollingEnabled(false);
+
+        // Init title
+        TextView textView = new TextView(this);
+        textView.setText(this.getResources().getString(R.string.edit_language_key_icon));
+        textView.setTextSize( (int) this.getResources().getDimension(R.dimen.activity_edit_language_text_font_size));
+        textView.setTextColor(this.getResources().getColor(R.color.colorWhite));
+        textView.setBackground(this.getResources().getDrawable(R.drawable.rect_red_1));
+        textView.setLayoutParams(params);
+        textView.setPadding(padding,padding,padding,padding);
+
+        // Invisible icon remove language (for same space)
+        ImageView iconRemoveLanguage = new ImageView(this);
+        iconRemoveLanguage.setImageResource(R.drawable.ic_remove_language);
+        iconRemoveLanguage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)this.getResources().getDimension(R.dimen.activity_edit_language_icon_size)));
+        iconRemoveLanguage.setBackground(getResources().getDrawable(R.drawable.selector_attach_keyboard));
+        iconRemoveLanguage.setVisibility(View.INVISIBLE);
+
+        // Init layout for the title and content
+        LinearLayout llLanguageViewIconAndTitleAndContent = new LinearLayout(this);
+        llLanguageViewIconAndTitleAndContent.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams llLanguageViewTitleAndContentParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        llLanguageViewTitleAndContentParam.setMargins(margin,margin,margin,margin);
+        llLanguageViewIconAndTitleAndContent.setLayoutParams(llLanguageViewTitleAndContentParam);
+
+        llLanguageViewIconAndTitleAndContent.addView(iconRemoveLanguage);
+        llLanguageViewIconAndTitleAndContent.addView(textView);
+        llLanguageViewIconAndTitleAndContent.addView(recyclerView);
+        llLanguageLayout.addView(llLanguageViewIconAndTitleAndContent);
+    }
+
     /**
      * Called to add a layout language
      * @param position : position of the layout language
@@ -138,7 +264,7 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
         // Set adapter of the recycler list
-        WordLanguageListAdapter wordLanguageListAdapter = new WordLanguageListAdapter(keyType,position,this);
+        WordLanguageListAdapter wordLanguageListAdapter = new WordLanguageListAdapter(keyType,position);
         listLanguageAdapter.add(wordLanguageListAdapter);
         recyclerView.setAdapter(wordLanguageListAdapter);
         recyclerView.setHasFixedSize(false);
@@ -169,18 +295,6 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
             }
         });
 
-        // Init icon add word
-        ImageView iconAddWord = new ImageView(this);
-        iconAddWord.setImageResource(R.drawable.ic_add);
-        iconAddWord.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)this.getResources().getDimension(R.dimen.activity_edit_language_icon_size)));
-        iconAddWord.setBackground(getResources().getDrawable(R.drawable.selector_attach_keyboard));
-        iconAddWord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNewWord();
-            }
-        });
-
         // Init layout for the title and content
         LinearLayout llLanguageViewIconAndTitleAndContent = new LinearLayout(this);
         llLanguageViewIconAndTitleAndContent.setOrientation(LinearLayout.VERTICAL);
@@ -191,28 +305,8 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         llLanguageViewIconAndTitleAndContent.addView(iconRemoveLanguage);
         llLanguageViewIconAndTitleAndContent.addView(editText);
         llLanguageViewIconAndTitleAndContent.addView(recyclerView);
-        if(position==0) {
-            llLanguageViewIconAndTitleAndContent.addView(iconAddWord);
-        }
+
         llLanguageLayout.addView(llLanguageViewIconAndTitleAndContent);
-    }
-
-    /**
-     * Init the layout action
-     */
-    private void initLayoutAction(){
-        // TODO
-        //listKeyActionAdapter = new ArrayList<>();
-        //addLayoutAction(i);
-    }
-
-    /**
-     * Init the layout icon
-     */
-    private void initLayoutIcon(){
-        // TODO
-        //listKeyIconAdapter = new ArrayList<>();
-        //addLayoutIcon(i);
     }
 
     /**
@@ -230,7 +324,7 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
      * Process called to add one simple word to all the language ("TO DO" word)
      */
     private void addNewWord(){
-        ModelKey myKey = new ModelKey(getResources().getString(R.string.edit_language_todo), Color.WHITE, Color.BLACK,DataStore.DEFAULT_KEY_TEXT_SIZE,DataStore.ACTION_SIMPLE_KEY,-1);
+        ModelKey myKey = new ModelKey(getResources().getString(R.string.edit_language_todo), Color.WHITE, Color.BLACK,DataStore.DEFAULT_KEY_TEXT_SIZE,DataStore.ACTION_SIMPLE_KEY,0);
         myKey.setKeyLanguages(new ArrayList<String>());
         for(int i=0;i<DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().size();i++){
             myKey.getKeyLanguages().add(this.getResources().getString(R.string.edit_language_todo));
@@ -241,11 +335,15 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
             for(int i=0;i<listLanguageAdapter.size();i++){
                 listLanguageAdapter.get(i).notifyItemInserted(DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().size());
             }
+            keyActionAdapter.notifyItemInserted(DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().size());
+            keyIconAdapter.notifyItemInserted(DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().size());
         }else{
             DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().add(myKey);
             for(int i=0;i<listLanguageAdapter.size();i++){
                 listLanguageAdapter.get(i).notifyItemInserted(DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().size());
             }
+            keyActionAdapter.notifyItemInserted(DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().size());
+            keyIconAdapter.notifyItemInserted(DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().size());
         }
     }
 
@@ -264,6 +362,13 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
             listLanguageAdapter.get(i).getListEditTextItemLanguage().remove(index);
             listLanguageAdapter.get(i).notifyItemRemoved(index);
         }
+        keyActionAdapter.getListSpinnerItem().get(index).clearFocus();
+        keyActionAdapter.getListSpinnerItem().remove(index);
+        keyActionAdapter.notifyItemRemoved(index);
+
+        keyIconAdapter.getListIconSpinnerItem().get(index).clearFocus();
+        keyIconAdapter.getListIconSpinnerItem().remove(index);
+        keyIconAdapter.notifyItemRemoved(index);
     }
 
     /**
@@ -393,12 +498,12 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
 
     /**
      * Process called to get the position of the selected item
-     * @param etItem : the item clicked
+     * @param materialSpinner : the item clicked
      * @return the position of the item clicked
      */
-    private int getPositionOfItemClicked(EditText etItem){
-        for(int i=0;i<listLanguageAdapter.get(0).getListEditTextItemLanguage().size();i++){
-            if(listLanguageAdapter.get(0).getListEditTextItemLanguage().get(i).equals(etItem)){
+    private int getPositionOfItemClicked(MaterialSpinner materialSpinner){
+        for(int i=0;i<keyActionAdapter.getListSpinnerItem().size();i++){
+            if(keyActionAdapter.getListSpinnerItem().get(i).equals(materialSpinner)){
                 return i;
             }
         }
@@ -406,9 +511,9 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
     }
 
     @Override
-    public void onClickRemoveItem(EditText etItem){
-        if(getPositionOfItemClicked(etItem)!=-1){
-            removeWord(getPositionOfItemClicked(etItem));
+    public void onClickRemoveItem(MaterialSpinner materialSpinner){
+        if(getPositionOfItemClicked(materialSpinner)!=-1){
+            removeWord(getPositionOfItemClicked(materialSpinner));
         }
     }
 

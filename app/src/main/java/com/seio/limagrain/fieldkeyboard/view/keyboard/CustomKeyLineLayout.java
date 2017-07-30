@@ -71,15 +71,35 @@ public class CustomKeyLineLayout extends LinearLayout{
      * @param iKeyInterface : the key interface of the Field keyboard
      * @return if the line is full
      */
-    public boolean addKeyboardKey(ModelKey modelKey, IKeyInterface iKeyInterface){
+    public boolean addBottomKeyboardKey(ModelKey modelKey, IKeyInterface iKeyInterface){
         if(listCustomKeyView.size()==DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbRow()){
             return false;
         }else{
-            CustomKeyView newCustomKeyView = new CustomKeyView(getApplication(),DataStore.KEY_TYPE_BOTTOM,modelKey,DataStore.getInstance().getViewKeyboardKeys().size(),iKeyInterface);
+            CustomKeyView newCustomKeyView = new CustomKeyView(getApplication(),DataStore.KEY_TYPE_BOTTOM,modelKey,DataStore.getInstance().getViewBottomKeys().size(),iKeyInterface);
             listCustomKeyView.add(newCustomKeyView);
             newCustomKeyView.setVisibility(View.INVISIBLE);
             ViewUtils.makeViewVisible(getApplication(), newCustomKeyView);
-            DataStore.getInstance().getViewKeyboardKeys().add(newCustomKeyView);
+            DataStore.getInstance().getViewBottomKeys().add(newCustomKeyView);
+            this.addView(newCustomKeyView);
+            return true;
+        }
+    }
+
+    /**
+     * Process called to add a key to the line
+     * @param modelKey : the model key to add
+     * @param iKeyInterface : the key interface of the Field keyboard
+     * @return if the line is full
+     */
+    public boolean addTopKeyboardKey(ModelKey modelKey, IKeyInterface iKeyInterface){
+        if(listCustomKeyView.size()==DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbRow()){
+            return false;
+        }else{
+            CustomKeyView newCustomKeyView = new CustomKeyView(getApplication(),DataStore.KEY_TYPE_TOP,modelKey,DataStore.getInstance().getViewTopKeys().size(),iKeyInterface);
+            listCustomKeyView.add(newCustomKeyView);
+            newCustomKeyView.setVisibility(View.INVISIBLE);
+            ViewUtils.makeViewVisible(getApplication(), newCustomKeyView);
+            DataStore.getInstance().getViewTopKeys().add(newCustomKeyView);
             this.addView(newCustomKeyView);
             return true;
         }

@@ -443,11 +443,11 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
             if(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).isKeySelected()){
                 if(currentMode==MODE_CHOOSE_BACKGROUND_COLOR) {
                     DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeyBackgroundColor(colorPickerFlower.getSelectedColor());
-                    ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewKeyboardKeys().get(i));
+                    ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewBottomKeys().get(i));
                 }
                 if(currentMode==MODE_CHOOSE_FONT_COLOR) {
                     DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeyFrontColor(colorPickerFlower.getSelectedColor());
-                    DataStore.getInstance().getViewKeyboardKeys().get(i).getMyTextView().setTextColor(colorPickerFlower.getSelectedColor());
+                    DataStore.getInstance().getViewBottomKeys().get(i).getMyTextView().setTextColor(colorPickerFlower.getSelectedColor());
                 }
             }
         }
@@ -461,17 +461,17 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
             if(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).isKeySelected()){
                 if(currentMode==MODE_CHOOSE_BACKGROUND_COLOR) {
                     DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).setKeyBackgroundColor(colorPickerFlower.getSelectedColor());
-                    ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewParameterKeys().get(i));
+                    ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewTopKeys().get(i));
                 }
                 if(currentMode==MODE_CHOOSE_FONT_COLOR) {
                     DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).setKeyFrontColor(colorPickerFlower.getSelectedColor());
                     // In this case the parameter key has a text
-                    if(DataStore.getInstance().getViewParameterKeys().get(i).getKeyIcon()==-1){
-                        DataStore.getInstance().getViewParameterKeys().get(i).getMyTextView().setTextColor(colorPickerFlower.getSelectedColor());
+                    if(DataStore.getInstance().getViewTopKeys().get(i).getKeyIcon()==0){
+                        DataStore.getInstance().getViewTopKeys().get(i).getMyTextView().setTextColor(colorPickerFlower.getSelectedColor());
                     }
                     // In this case the parameter key has an icon
                     else{
-                        DataStore.getInstance().getViewParameterKeys().get(i).getMyImageView().setColorFilter(colorPickerFlower.getSelectedColor());
+                        DataStore.getInstance().getViewTopKeys().get(i).getMyImageView().setColorFilter(colorPickerFlower.getSelectedColor());
                     }
                 }
             }
@@ -526,9 +526,9 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
             DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeySelected(isAllKeyNotSelected);
         }
         // View
-        for(int i=0;i<DataStore.getInstance().getViewKeyboardKeys().size();i++){
-            DataStore.getInstance().getViewKeyboardKeys().get(i).setSelected(isAllKeyNotSelected);
-            ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewKeyboardKeys().get(i));
+        for(int i = 0; i<DataStore.getInstance().getViewBottomKeys().size(); i++){
+            DataStore.getInstance().getViewBottomKeys().get(i).setSelected(isAllKeyNotSelected);
+            ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewBottomKeys().get(i));
         }
 
         // PARAMETER KEY
@@ -537,9 +537,9 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
             DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).setKeySelected(isAllKeyNotSelected);
         }
         // View
-        for(int i=0;i<DataStore.getInstance().getViewParameterKeys().size();i++){
-            DataStore.getInstance().getViewParameterKeys().get(i).setSelected(isAllKeyNotSelected);
-            ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewParameterKeys().get(i));
+        for(int i = 0; i<DataStore.getInstance().getViewTopKeys().size(); i++){
+            DataStore.getInstance().getViewTopKeys().get(i).setSelected(isAllKeyNotSelected);
+            ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewTopKeys().get(i));
         }
     }
 
@@ -547,23 +547,23 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
      * Process called to set the size of the selected keys
      */
     private void setSelectedKeySize(){
-        for(int i=0;i<DataStore.getInstance().getViewKeyboardKeys().size();i++) {
-            if(DataStore.getInstance().getViewKeyboardKeys().get(i).isSelected()){
+        for(int i = 0; i<DataStore.getInstance().getViewBottomKeys().size(); i++) {
+            if(DataStore.getInstance().getViewBottomKeys().get(i).isSelected()){
                 int size = Math.round(Float.valueOf(tvRatingBar.getText().toString()));
-                DataStore.getInstance().getViewKeyboardKeys().get(i).getMyTextView().setTextSize(size);
+                DataStore.getInstance().getViewBottomKeys().get(i).getMyTextView().setTextSize(size);
                 DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeyFrontSize(size);
             }
         }
 
-        for(int i=0;i<DataStore.getInstance().getViewParameterKeys().size();i++) {
-            if(DataStore.getInstance().getViewParameterKeys().get(i).isSelected()){
-                if(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).getKeyIcon()==-1){
+        for(int i = 0; i<DataStore.getInstance().getViewTopKeys().size(); i++) {
+            if(DataStore.getInstance().getViewTopKeys().get(i).isSelected()){
+                if(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).getKeyIcon()==0){
                     int size = Math.round(Float.valueOf(tvRatingBar.getText().toString()));
-                    DataStore.getInstance().getViewParameterKeys().get(i).getMyTextView().setTextSize(size);
+                    DataStore.getInstance().getViewTopKeys().get(i).getMyTextView().setTextSize(size);
                     DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).setKeyFrontSize(size);
                 }else{
                     int size = DimUtils.dipToPixel(getApplicationContext(), Math.round(Float.valueOf(tvRatingBar.getText().toString())))*2;
-                    DataStore.getInstance().getViewParameterKeys().get(i).setImageSize(size);
+                    DataStore.getInstance().getViewTopKeys().get(i).setImageSize(size);
                     DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).setKeyFrontSize(size);
                 }
             }
@@ -591,12 +591,12 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
         StepKeyboardPage currentPage = viewPagerBottomAdapter.getStepKeyboardPageList().get(itemPage);
         int itemLine=currentPage.getListLineKeyList().size()-1;
 
-        if(!currentPage.getListLineKeyList().get(itemLine).addKeyboardKey(modelKey,this)){
-            if(!currentPage.addLineAndKey(modelKey,this)) {
+        if(!currentPage.getListLineKeyList().get(itemLine).addBottomKeyboardKey(modelKey,this)){
+            if(!currentPage.addBottomLineAndKey(modelKey,this)) {
                 addPageToBottomKeyboard();
                 viewPagerBottomAdapter.getStepKeyboardPageList()
                         .get(viewPagerBottomAdapter.getStepKeyboardPageList().size()-1).getListLineKeyList()
-                        .get(0).addKeyboardKey(modelKey, this);
+                        .get(0).addBottomKeyboardKey(modelKey, this);
 
                 viewPagerBottomAdapter.notifyDataSetChanged();
                 viewPagerBottom.setCurrentItem(itemPage + 1);
@@ -617,12 +617,12 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
         StepKeyboardPage currentPage = viewPagerTopAdapter.getStepKeyboardPageList().get(itemPage);
         int itemLine=currentPage.getListLineKeyList().size()-1;
 
-        if(!currentPage.getListLineKeyList().get(itemLine).addKeyboardKey(modelKey,this)){
-            if(!currentPage.addLineAndKey(modelKey,this)) {
+        if(!currentPage.getListLineKeyList().get(itemLine).addTopKeyboardKey(modelKey,this)){
+            if(!currentPage.addTopLineAndKey(modelKey,this)) {
                 addPageToTopKeyboard();
                 viewPagerTopAdapter.getStepKeyboardPageList()
                         .get(viewPagerTopAdapter.getStepKeyboardPageList().size()-1).getListLineKeyList()
-                        .get(0).addKeyboardKey(modelKey, this);
+                        .get(0).addTopKeyboardKey(modelKey, this);
 
                 viewPagerTopAdapter.notifyDataSetChanged();
                 viewPagerTop.setCurrentItem(itemPage + 1);
@@ -655,7 +655,8 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
         viewPagerTopAdapter.addView(stepKeyboardPage);
         viewPagerTopAdapter.notifyDataSetChanged();
 
-        tvCurrentPage.setText(viewPagerTop.getCurrentItem()+1+"/"+ viewPagerTopAdapter.getCount());
+        // TODO remove cause it's just for the bottom
+        // TODO -> tvCurrentPage.setText(viewPagerTop.getCurrentItem()+1+"/"+ viewPagerTopAdapter.getCount());
     }
 
     /**
@@ -840,15 +841,15 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
         // Set select to false for keyboard keys
         for(int i = 0; i<DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().size(); i++){
             DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeySelected(false);
-            DataStore.getInstance().getViewKeyboardKeys().get(i).setSelected(false);
-            ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewKeyboardKeys().get(i));
+            DataStore.getInstance().getViewBottomKeys().get(i).setSelected(false);
+            ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewBottomKeys().get(i));
         }
 
         // Set select to false for parameter keys
         for(int i = 0; i<DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().size(); i++){
             DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).setKeySelected(false);
-            DataStore.getInstance().getViewParameterKeys().get(i).setSelected(false);
-            ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewParameterKeys().get(i));
+            DataStore.getInstance().getViewTopKeys().get(i).setSelected(false);
+            ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewTopKeys().get(i));
         }
 
         currentMode=MODE_NORMAL;
@@ -1020,8 +1021,8 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
      */
     public void applyKeyboardConfiguration(){
         // Destroy current view
-        DataStore.getInstance().setViewKeyboardKeys(new ArrayList<CustomKeyView>());
-        DataStore.getInstance().setViewParameterKeys(new ArrayList<CustomKeyView>());
+        DataStore.getInstance().setViewBottomKeys(new ArrayList<CustomKeyView>());
+        DataStore.getInstance().setViewTopKeys(new ArrayList<CustomKeyView>());
         if(viewPagerBottomAdapter !=null){
             viewPagerBottomAdapter.removeAllViews();
         }

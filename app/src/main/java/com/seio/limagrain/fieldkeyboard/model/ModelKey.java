@@ -32,7 +32,7 @@ public class ModelKey {
     @SerializedName("key_front_color")
     private int keyFrontColor;
 
-    // keyIcon = -1 if the key has no icon
+    // keyIcon = 0 if the key has no icon
     @SerializedName("key_icon")
     private int keyIcon;
 
@@ -52,7 +52,7 @@ public class ModelKey {
      * @param keyFrontColor : the integer key foreground color
      * @param keyFrontSize : the integer key front size
      * @param keyAction : the string key action
-     * @param keyIcon : the integer key icon (keyIcon = -1 if the key has no icon)
+     * @param keyIcon : the integer key icon (keyIcon = 0 if the key has no icon)
      */
     public ModelKey(String keyString, int keyBackgroundColor, int keyFrontColor, int keyFrontSize, String keyAction, int keyIcon){
         this.keyBackgroundColor = keyBackgroundColor;

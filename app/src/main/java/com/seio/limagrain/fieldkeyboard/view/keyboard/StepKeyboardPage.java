@@ -75,13 +75,32 @@ public class StepKeyboardPage {
      * @param iKeyInterface
      * @return
      */
-    public boolean addLineAndKey(ModelKey modelKey, IKeyInterface iKeyInterface){
+    public boolean addBottomLineAndKey(ModelKey modelKey, IKeyInterface iKeyInterface){
         CustomKeyLineLayout newLine = new CustomKeyLineLayout(this.application,this.application);
 
         if(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine()==listLineKeyList.size()){
             return false;
         }else{
-            newLine.addKeyboardKey(modelKey, iKeyInterface);
+            newLine.addBottomKeyboardKey(modelKey, iKeyInterface);
+            keyboardPageLayout.addView(newLine);
+            listLineKeyList.add(newLine);
+            return true;
+        }
+    }
+
+    /**
+     * Process called to add a line and key on the current page
+     * @param modelKey
+     * @param iKeyInterface
+     * @return
+     */
+    public boolean addTopLineAndKey(ModelKey modelKey, IKeyInterface iKeyInterface){
+        CustomKeyLineLayout newLine = new CustomKeyLineLayout(this.application,this.application);
+
+        if(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbLine()==listLineKeyList.size()){
+            return false;
+        }else{
+            newLine.addTopKeyboardKey(modelKey, iKeyInterface);
             keyboardPageLayout.addView(newLine);
             listLineKeyList.add(newLine);
             return true;
