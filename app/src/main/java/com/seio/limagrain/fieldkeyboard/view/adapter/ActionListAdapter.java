@@ -64,7 +64,7 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.My
             final List<String> actionsList = new ArrayList<>(Arrays.asList(actions));
             ArrayAdapter<String> actionAdapter = new ActionSpinnerArrayAdapter(context,R.layout.spinner_item,actionsList);
 
-            actionAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+            actionAdapter.setDropDownViewResource(R.layout.spinner_action_dropdown_item);
             spAction.setAdapter(actionAdapter);
 
             btRemoveWord = (ImageView) view.findViewById(R.id.btRemoveWord);

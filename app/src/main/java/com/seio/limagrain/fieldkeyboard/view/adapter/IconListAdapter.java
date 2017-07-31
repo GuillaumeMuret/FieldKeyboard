@@ -26,16 +26,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.seio.limagrain.fieldkeyboard.R;
 import com.seio.limagrain.fieldkeyboard.model.DataStore;
 import com.seio.limagrain.fieldkeyboard.utils.ViewUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
@@ -61,9 +57,9 @@ public class IconListAdapter extends RecyclerView.Adapter<IconListAdapter.MyWord
             spIcon =      (MaterialSpinner)   view.findViewById(R.id.spIcon);
 
             // Initializing a Array
-            ArrayAdapter<ImageView> iconAdapter = new IconSpinnerArrayAdapter(context,R.layout.spinner_item,ViewUtils.getIconList(context));
+            ArrayAdapter<Integer> iconAdapter = new IconSpinnerArrayAdapter(context,R.layout.spinner_item,ViewUtils.getIconResourcesList());
 
-            iconAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+            iconAdapter.setDropDownViewResource(R.layout.spinner_icon_dropdown_item);
             spIcon.setAdapter(iconAdapter);
 
             //llIconView =    (LinearLayout)      view.findViewById(R.id.llIconView);

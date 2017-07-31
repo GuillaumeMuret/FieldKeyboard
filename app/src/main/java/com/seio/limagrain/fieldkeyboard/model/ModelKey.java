@@ -118,4 +118,12 @@ public class ModelKey {
     public void setKeyLanguages(ArrayList<String> keyLanguages) {
         this.keyLanguages = keyLanguages;
     }
+
+    public void setKeyIcon(int keyIcon) {
+        this.keyIcon = keyIcon;
+    }
+
+    public void setKeyAction(String keyAction) {
+        this.keyAction = keyAction;
+    }
 }

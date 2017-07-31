@@ -140,44 +140,11 @@ public class ViewUtils {
         DataStore.getInstance().getKeyboardConfiguration().setTopKeyboardHeight(DimUtils.pixelToDip(context,currentHeight-y));
     }
 
-    /**
-     * Process called to disselect all the icon of the layout in param
-     * @param llIconView the layout where disselect all child
-     */
-    private static void disselectedAll(LinearLayout llIconView){
-        for(int i=0;i<llIconView.getChildCount();i++){
-            llIconView.getChildAt(i).setSelected(false);
-        }
-    }
-
-    /**
-     * Process called to add an image to the layout
-     * @param llIconView : the layout where the image has to be added
-     * @param imageResources : the image to add
-     */
-    private static void addNewImageToLayout(final LinearLayout llIconView, final int imageResources){
-        final ImageView imageView = new ImageView(llIconView.getContext());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)llIconView.getContext().getResources().getDimension(R.dimen.main_activity_dialog_icon_size),(int)llIconView.getContext().getResources().getDimension(R.dimen.main_activity_dialog_icon_size));
-        int margin = (int)llIconView.getResources().getDimension(R.dimen.main_activity_dialog_icon_margin);
-        params.setMargins(margin,margin,margin,margin);
-        imageView.setLayoutParams(params);
-        imageView.setImageResource(imageResources);
-        imageView.setBackground(llIconView.getResources().getDrawable(R.drawable.selector_change_page_keyboard));
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                disselectedAll(llIconView);
-                imageView.setSelected(true);
-            }
-        });
-        llIconView.addView(imageView);
-    }
-
-    private static ImageView addNewImageFromResource(Context context,final int imageResources){
+    public static ImageView getImageFromResource(Context context,final int imageResources){
         final ImageView imageView = new ImageView(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                (int)context.getResources().getDimension(R.dimen.main_activity_dialog_icon_size),
-                (int)context.getResources().getDimension(R.dimen.main_activity_dialog_icon_size)
+                (int)context.getResources().getDimension(R.dimen.activity_edit_language_icon_size),
+                (int)context.getResources().getDimension(R.dimen.activity_edit_language_icon_size)
         );
         int margin = (int)context.getResources().getDimension(R.dimen.main_activity_dialog_icon_margin);
         params.setMargins(margin,margin,margin,margin);
@@ -186,84 +153,39 @@ public class ViewUtils {
         return imageView;
     }
 
-    public static List<ImageView> getIconList(Context context){
-        ArrayList<ImageView> iconList = new ArrayList<>();
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_checkbox));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
-        iconList.add(addNewImageFromResource(context,R.drawable.ic_param_unavailable));
+    public static List<Integer> getIconResourcesList(){
+        ArrayList<Integer> iconList = new ArrayList<>();
+        iconList.add(R.drawable.ic_param_unavailable);
+        iconList.add(R.drawable.ic_param_checkbox);
+        iconList.add(R.drawable.ic_param_delete);
+        iconList.add(R.drawable.ic_param_double_arrow_bottom);
+        iconList.add(R.drawable.ic_param_double_arrow_left);
+        iconList.add(R.drawable.ic_param_double_arrow_right);
+        iconList.add(R.drawable.ic_param_double_arrow_top);
+        iconList.add(R.drawable.ic_param_expand_arrow_bottom);
+        iconList.add(R.drawable.ic_param_expand_arrow_left);
+        iconList.add(R.drawable.ic_param_expand_arrow_right);
+        iconList.add(R.drawable.ic_param_expand_arrow_top);
+        iconList.add(R.drawable.ic_param_forward_arrow_bottom);
+        iconList.add(R.drawable.ic_param_forward_arrow_left);
+        iconList.add(R.drawable.ic_param_forward_arrow_right);
+        iconList.add(R.drawable.ic_param_forward_arrow_top);
+        iconList.add(R.drawable.ic_param_long_arrow_bottom);
+        iconList.add(R.drawable.ic_param_long_arrow_left);
+        iconList.add(R.drawable.ic_param_long_arrow_right);
+        iconList.add(R.drawable.ic_param_long_arrow_top);
+        iconList.add(R.drawable.ic_param_play_bottom);
+        iconList.add(R.drawable.ic_param_play_left);
+        iconList.add(R.drawable.ic_param_play_right);
+        iconList.add(R.drawable.ic_param_play_top);
+        iconList.add(R.drawable.ic_param_backspace_1);
+        iconList.add(R.drawable.ic_param_backspace_2);
+        iconList.add(R.drawable.ic_param_forward_space);
+        iconList.add(R.drawable.ic_param_copy);
+        iconList.add(R.drawable.ic_param_paste);
+        iconList.add(R.drawable.ic_param_cut);
+        iconList.add(R.drawable.ic_param_trash);
         return iconList;
-    }
-
-    /**
-     * Process called to init the param icon view
-     * @param llIconView : the layout of the icon view
-     */
-    public static void initParamIconView(LinearLayout llIconView){
-        llIconView.removeAllViews();
-
-        addNewImageToLayout(llIconView,R.drawable.ic_param_unavailable);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_checkbox);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_delete);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_double_arrow_bottom);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_double_arrow_left);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_double_arrow_right);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_double_arrow_top);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_expand_arrow_bottom);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_expand_arrow_left);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_expand_arrow_right);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_expand_arrow_top);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_forward_arrow_bottom);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_forward_arrow_left);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_forward_arrow_right);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_forward_arrow_top);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_long_arrow_bottom);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_long_arrow_left);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_long_arrow_right);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_long_arrow_top);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_play_bottom);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_play_left);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_play_right);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_play_top);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_backspace_1);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_backspace_2);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_forward_space);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_copy);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_paste);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_cut);
-        addNewImageToLayout(llIconView,R.drawable.ic_param_trash);
-
-        llIconView.getChildAt(0).setSelected(true);
     }
 
     /**

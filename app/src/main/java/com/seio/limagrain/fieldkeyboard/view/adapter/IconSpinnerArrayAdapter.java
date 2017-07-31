@@ -28,15 +28,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.seio.limagrain.fieldkeyboard.R;
+import com.seio.limagrain.fieldkeyboard.utils.ViewUtils;
 
 import java.util.List;
 
-public class IconSpinnerArrayAdapter extends ArrayAdapter<ImageView> {
+public class IconSpinnerArrayAdapter extends ArrayAdapter<Integer> {
 
     // Context of the activity
     public Context context;
 
-    public List<ImageView> listImageView;
+    public List<Integer> listIconResourcesView;
 
     /**
      * Main constructor of the spinner array adapter use for choose key action
@@ -44,9 +45,9 @@ public class IconSpinnerArrayAdapter extends ArrayAdapter<ImageView> {
      * @param resource : the resources of the app
      * @param objects : the list of item to display
      */
-    public IconSpinnerArrayAdapter(Context context, int resource, List<ImageView> objects) {
+    public IconSpinnerArrayAdapter(Context context, int resource, List<Integer> objects) {
         super(context, resource, objects);
-        this.listImageView = objects;
+        this.listIconResourcesView = objects;
         this.context=context;
     }
 
@@ -59,23 +60,19 @@ public class IconSpinnerArrayAdapter extends ArrayAdapter<ImageView> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //return super.getView(position, convertView, parent);
-        if(convertView==null){
-            convertView = listImageView.get(position);
-        }
+        convertView = ViewUtils.getImageFromResource(context,listIconResourcesView.get(position));
         return convertView;
     }
 
     @Override
     public View getDropDownView(int position, View convertView,ViewGroup parent) {
-        View view = super.getDropDownView(position, convertView, parent);
         ImageView imageView;
-        imageView = listImageView.get(position);
+        imageView =  ViewUtils.getImageFromResource(context,listIconResourcesView.get(position));
 
         if(position%2==0){
             // Set the item background color
             imageView.setBackgroundColor(context.getResources().getColor(R.color.color_spinner_hint));
-        }
-        else {
+        }else {
             // Set the alternate item background color
             imageView.setBackgroundColor(context.getResources().getColor(R.color.color_spinner_item));
         }

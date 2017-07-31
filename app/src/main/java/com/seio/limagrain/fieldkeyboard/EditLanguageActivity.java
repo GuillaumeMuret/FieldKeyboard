@@ -430,22 +430,33 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
      */
     private void saveKeyboardConfiguration(){
         if(!isErrorLanguage()) {
-            for (int i = 0; i < listLanguageName.size(); i++) {
-                DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().set(i,listLanguageName.get(i).getText().toString());
-                if(keyType.equals(DataStore.KEY_TYPE_BOTTOM)) {
+            if(keyType.equals(DataStore.KEY_TYPE_BOTTOM)) {
+                for (int i = 0; i < listLanguageName.size(); i++) {
+                    DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().set(i, listLanguageName.get(i).getText().toString());
                     for (int j = 0; j < DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().size(); j++) {
                         DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().get(j).getKeyLanguages().set(
                                 i,
                                 listLanguageAdapter.get(i).getListEditTextItemLanguage().get(j).getText().toString()
                         );
                     }
-                }else{
+                }
+                for(int i=0;i<DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().size();i++){
+                    DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().get(i).setKeyAction((String)keyActionAdapter.getListSpinnerItem().get(i).getSelectedItem());
+                    DataStore.getInstance().getTmpKeyboardConfiguration().getModelBottomKeys().get(i).setKeyIcon(keyIconAdapter.getListIconSpinnerItem().get(i).getSelectedItemPosition());
+                }
+            }else{
+                for (int i = 0; i < listLanguageName.size(); i++) {
+                    DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().set(i, listLanguageName.get(i).getText().toString());
                     for (int j = 0; j < DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().size(); j++) {
                         DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().get(j).getKeyLanguages().set(
                                 i,
                                 listLanguageAdapter.get(i).getListEditTextItemLanguage().get(j).getText().toString()
                         );
                     }
+                }
+                for(int i=0;i<DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().size();i++){
+                    DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().get(i).setKeyAction((String)keyActionAdapter.getListSpinnerItem().get(i).getSelectedItem());
+                    DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().get(i).setKeyIcon(keyIconAdapter.getListIconSpinnerItem().get(i).getSelectedItemPosition());
                 }
             }
             DataStore.getInstance().setKeyboardConfiguration(DataStore.getInstance().getTmpKeyboardConfiguration());

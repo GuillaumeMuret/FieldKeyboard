@@ -549,9 +549,15 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
     private void setSelectedKeySize(){
         for(int i = 0; i<DataStore.getInstance().getViewBottomKeys().size(); i++) {
             if(DataStore.getInstance().getViewBottomKeys().get(i).isSelected()){
-                int size = Math.round(Float.valueOf(tvRatingBar.getText().toString()));
-                DataStore.getInstance().getViewBottomKeys().get(i).getMyTextView().setTextSize(size);
-                DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeyFrontSize(size);
+                if(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).getKeyIcon()==0){
+                    int size = Math.round(Float.valueOf(tvRatingBar.getText().toString()));
+                    DataStore.getInstance().getViewBottomKeys().get(i).getMyTextView().setTextSize(size);
+                    DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeyFrontSize(size);
+                }else{
+                    int size = DimUtils.dipToPixel(getApplicationContext(), Math.round(Float.valueOf(tvRatingBar.getText().toString())))*2;
+                    DataStore.getInstance().getViewBottomKeys().get(i).setImageSize(size);
+                    DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeyFrontSize(size);
+                }
             }
         }
 
