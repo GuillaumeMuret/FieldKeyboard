@@ -95,13 +95,15 @@ public class FileUtils {
      * @return if the keyboard has an error
      */
     private static boolean isErrorKeyboard(KeyboardConfiguration keyboardConfiguration){
-        for(int i = 0; i<keyboardConfiguration.getModelBottomKeys().size(); i++){
-            if(keyboardConfiguration.getModelBottomKeys().size()>0) {
+        for(int i = 0; i<keyboardConfiguration.getModelBottomKeys().size(); i++) {
+            if (keyboardConfiguration.getModelBottomKeys().size() > 0) {
                 if (keyboardConfiguration.getModelBottomKeys().get(i).getKeyLanguages().size() != keyboardConfiguration.getKeyboardLanguages().size()) {
                     Log.d(DataStore.TAG, "getModelBottomKeys ERROR => " + i);
                     return true;
                 }
             }
+        }
+        for(int i = 0; i<keyboardConfiguration.getModelTopKeys().size(); i++){
             if(keyboardConfiguration.getModelTopKeys().size()>0){
                 if(keyboardConfiguration.getModelTopKeys().get(i).getKeyLanguages().size()!=keyboardConfiguration.getKeyboardLanguages().size()){
                     Log.d(DataStore.TAG,"getModelTopKeys ERROR => "+i);
@@ -138,7 +140,7 @@ public class FileUtils {
      */
     public static void overwriteCurrentKeyboardConfiguration(Context context, Uri uri){
         String path = getPath(context, uri);
-        try {
+        //try {
             // Get the file instance
             File keyboardConfigFile = new File(path);
             switch(getFileExtension(path)){
@@ -151,9 +153,9 @@ public class FileUtils {
                     CsvUtils.manageKeyboardConfigurationFileCSV(keyboardConfigFile);
                     break;
             }
-        } catch(Exception e){
+        /*} catch(Exception e){
             reinitKeyboard();
-        }
+        }*/
     }
 
     /**

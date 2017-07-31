@@ -47,7 +47,7 @@ public class CustomKeyLineLayout extends LinearLayout{
      * @param context : the context of the activity
      * @param application : the application
      */
-    public CustomKeyLineLayout(Context context, Application application) {
+    public CustomKeyLineLayout(int nbRow,Context context, Application application) {
         super(context);
         this.application=application;
 
@@ -55,7 +55,7 @@ public class CustomKeyLineLayout extends LinearLayout{
         params.height = 0;
 
         this.setLayoutParams(params);
-        this.setWeightSum(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbRow());
+        this.setWeightSum(nbRow);
 
         this.setGravity(Gravity.START);
         this.setOrientation(LinearLayout.HORIZONTAL);

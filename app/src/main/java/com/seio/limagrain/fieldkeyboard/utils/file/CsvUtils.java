@@ -37,7 +37,6 @@ public class CsvUtils {
 
     // The different constant of the keyboard file
     private static final int CSV_FILE_KEYBOARD_CONFIGURATION_LINE_NUMBER    = 3;
-    private static final int CSV_FILE_KEYBOARD_KEYS_LANGUAGE_NAME_POSITION  = 3;
     private static final int CSV_FILE_KEYS_LANGUAGE_NAME_POSITION = 5;
 
     // The CSV file name
@@ -68,7 +67,7 @@ public class CsvUtils {
         ArrayList<String[]> stringCsvFile = new ArrayList<>();
         BufferedReader br = null;
         String line;
-        String cvsSplitBy = ",";
+        String cvsSplitBy = ";";
         try {
             br = new BufferedReader(new FileReader(keyboardConfigFile));
             while ((line = br.readLine()) != null) {
@@ -175,9 +174,9 @@ public class CsvUtils {
      * @param line          : the current line
      * @param stringCsvFile : ArrayList of the file line by line
      */
-    private static void manageFirstLineKeyboardKeysStringCSV(int line, ArrayList<String[]> stringCsvFile) {
+    private static void manageFirstLineBottomKeysStringCSV(int line, ArrayList<String[]> stringCsvFile) {
         ArrayList<String> arrayListLanquage = new ArrayList<>();
-        for (int i = CSV_FILE_KEYBOARD_KEYS_LANGUAGE_NAME_POSITION; i < stringCsvFile.get(line).length; i++) {
+        for (int i = CSV_FILE_KEYS_LANGUAGE_NAME_POSITION; i < stringCsvFile.get(line).length; i++) {
             arrayListLanquage.add(stringCsvFile.get(line)[i]);
         }
         DataStore.getInstance().getTmpKeyboardConfiguration().setKeyboardLanguages(arrayListLanquage);
@@ -191,7 +190,7 @@ public class CsvUtils {
      * @return the next current line (at the end of the paragraph)
      */
     private static int manageBottomKeyboardKeysStringCSV(int line, ArrayList<String[]> stringCsvFile) {
-        manageFirstLineKeyboardKeysStringCSV(line,stringCsvFile);
+        manageFirstLineBottomKeysStringCSV(line,stringCsvFile);
         line++;
         while (line < stringCsvFile.size() && stringCsvFile.get(line).length > 0 && stringCsvFile.get(line)[0].substring(0, 1).equals("#")) {
             ModelKey currentModelKey = new ModelKey(
@@ -366,10 +365,10 @@ public class CsvUtils {
                 String lineToWrite = "";
                 if (stringCsvFile.get(i).length > 0) {
                     for (int j = 0; j < stringCsvFile.get(i).length; j++) {
-                        lineToWrite += stringCsvFile.get(i)[j] + ",";
+                        lineToWrite += stringCsvFile.get(i)[j] + ";";
                     }
                 } else {
-                    lineToWrite = ",";
+                    lineToWrite = ";";
                 }
                 lineToWrite += "\r\n";
                 writer.append(lineToWrite);

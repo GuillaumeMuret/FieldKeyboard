@@ -102,9 +102,6 @@ public class CustomKeyView extends LinearLayout {
             this.myTextView.setTextSize(modelKey.getKeyFrontSize());
             this.myTextView.setTextColor(modelKey.getKeyFrontColor());
             this.myTextView.setLayoutParams(keyParams);
-            if(keyType.equals(DataStore.KEY_TYPE_TOP)){
-                this.setPadding(dipMargin*5,dipMargin,dipMargin*5,dipMargin);
-            }
             this.myTextView.setPaddingRelative(dipMargin,dipMargin,dipMargin,dipMargin);
             this.addView(this.myTextView);
         }

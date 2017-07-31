@@ -48,23 +48,23 @@ public class StepKeyboardPage {
      * @param application : the application
      * @param view : the view
      */
-    public StepKeyboardPage(Application application, View view) {
+    public StepKeyboardPage(int nbRow, int nbLine, Application application, View view) {
         this.view = view;
         this.application = application;
         listLineKeyList =new ArrayList<>();
 
         keyboardPageLayout = (LinearLayout) view.findViewById(R.id.keyboardPageLayout);
-        keyboardPageLayout.setWeightSum(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine());
+        keyboardPageLayout.setWeightSum(nbLine);
 
-        addLine();
+        addLine(nbRow);
 
     }
 
     /**
      * Process called to add a new line to the current page
      */
-    public void addLine(){
-        CustomKeyLineLayout newLine = new CustomKeyLineLayout(this.application,this.application);
+    public void addLine(int nbRow){
+        CustomKeyLineLayout newLine = new CustomKeyLineLayout(nbRow,this.application,this.application);
         keyboardPageLayout.addView(newLine);
         listLineKeyList.add(newLine);
     }
@@ -76,7 +76,7 @@ public class StepKeyboardPage {
      * @return
      */
     public boolean addBottomLineAndKey(ModelKey modelKey, IKeyInterface iKeyInterface){
-        CustomKeyLineLayout newLine = new CustomKeyLineLayout(this.application,this.application);
+        CustomKeyLineLayout newLine = new CustomKeyLineLayout(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbRow(),this.application,this.application);
 
         if(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine()==listLineKeyList.size()){
             return false;
@@ -95,8 +95,7 @@ public class StepKeyboardPage {
      * @return
      */
     public boolean addTopLineAndKey(ModelKey modelKey, IKeyInterface iKeyInterface){
-        CustomKeyLineLayout newLine = new CustomKeyLineLayout(this.application,this.application);
-
+        CustomKeyLineLayout newLine = new CustomKeyLineLayout(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbRow(),this.application,this.application);
         if(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbLine()==listLineKeyList.size()){
             return false;
         }else{

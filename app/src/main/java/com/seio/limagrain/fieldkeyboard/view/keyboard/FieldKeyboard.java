@@ -29,6 +29,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Vibrator;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -438,40 +439,22 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
     /**
      * Process called to set the keyboard keys color
      */
-    private void setKeyboardKeysColor(){
-        for(int i = 0; i<DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().size(); i++) {
-            if(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).isKeySelected()){
+    private void setKeyColorBottomTop(ArrayList<ModelKey> listModelKey,ArrayList<CustomKeyView> listViewKey){
+        for(int i = 0; i<listModelKey.size(); i++) {
+            if(listModelKey.get(i).isKeySelected()){
                 if(currentMode==MODE_CHOOSE_BACKGROUND_COLOR) {
-                    DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeyBackgroundColor(colorPickerFlower.getSelectedColor());
-                    ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewBottomKeys().get(i));
+                    listModelKey.get(i).setKeyBackgroundColor(colorPickerFlower.getSelectedColor());
+                    ViewUtils.setKeyBackgroundColor(listViewKey.get(i));
                 }
                 if(currentMode==MODE_CHOOSE_FONT_COLOR) {
-                    DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).setKeyFrontColor(colorPickerFlower.getSelectedColor());
-                    DataStore.getInstance().getViewBottomKeys().get(i).getMyTextView().setTextColor(colorPickerFlower.getSelectedColor());
-                }
-            }
-        }
-    }
-
-    /**
-     * Process called to set the parameter keys color
-     */
-    private void setParameterKeysColor(){
-        for(int i = 0; i<DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().size(); i++) {
-            if(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).isKeySelected()){
-                if(currentMode==MODE_CHOOSE_BACKGROUND_COLOR) {
-                    DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).setKeyBackgroundColor(colorPickerFlower.getSelectedColor());
-                    ViewUtils.setKeyBackgroundColor(DataStore.getInstance().getViewTopKeys().get(i));
-                }
-                if(currentMode==MODE_CHOOSE_FONT_COLOR) {
-                    DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).setKeyFrontColor(colorPickerFlower.getSelectedColor());
+                    listModelKey.get(i).setKeyFrontColor(colorPickerFlower.getSelectedColor());
                     // In this case the parameter key has a text
-                    if(DataStore.getInstance().getViewTopKeys().get(i).getKeyIcon()==0){
-                        DataStore.getInstance().getViewTopKeys().get(i).getMyTextView().setTextColor(colorPickerFlower.getSelectedColor());
+                    if(listViewKey.get(i).getKeyIcon()==0){
+                        listViewKey.get(i).getMyTextView().setTextColor(colorPickerFlower.getSelectedColor());
                     }
                     // In this case the parameter key has an icon
                     else{
-                        DataStore.getInstance().getViewTopKeys().get(i).getMyImageView().setColorFilter(colorPickerFlower.getSelectedColor());
+                        listViewKey.get(i).getMyImageView().setColorFilter(colorPickerFlower.getSelectedColor());
                     }
                 }
             }
@@ -483,12 +466,9 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
      */
     private void setKeyColor(){
 
-        // Set Color for keyboard keys
-        setKeyboardKeysColor();
-
-        // Set Color for parameter keys
-        setParameterKeysColor();
-
+        // Set Color for keys
+        setKeyColorBottomTop(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys(),DataStore.getInstance().getViewBottomKeys());
+        setKeyColorBottomTop(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys(),DataStore.getInstance().getViewTopKeys());
 
         switchModeSelection();
         if(btModeMoving.isSelected()){
@@ -642,7 +622,7 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
      * Add a new page to the keyboard (when all lines are full)
      */
     private void addPageToBottomKeyboard(){
-        StepKeyboardPage stepKeyboardPage = new StepKeyboardPage(this.getApplication(), getLayoutInflater().inflate(R.layout.fragment_keyboard_page_container,null));
+        StepKeyboardPage stepKeyboardPage = new StepKeyboardPage(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbRow(),DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine(),this.getApplication(), getLayoutInflater().inflate(R.layout.fragment_keyboard_page_container,null));
         viewPagerBottom.addView(stepKeyboardPage.getView());
         viewPagerBottom.setOffscreenPageLimit(viewPagerBottomAdapter.getCount()+1);
         viewPagerBottomAdapter.addView(stepKeyboardPage);
@@ -655,7 +635,7 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
      * Add a new page to the keyboard (when all lines are full)
      */
     private void addPageToTopKeyboard(){
-        StepKeyboardPage stepKeyboardPage = new StepKeyboardPage(this.getApplication(), getLayoutInflater().inflate(R.layout.fragment_keyboard_page_container,null));
+        StepKeyboardPage stepKeyboardPage = new StepKeyboardPage(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbRow(),DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbLine(),this.getApplication(), getLayoutInflater().inflate(R.layout.fragment_keyboard_page_container,null));
         viewPagerTop.addView(stepKeyboardPage.getView());
         viewPagerTop.setOffscreenPageLimit(viewPagerTopAdapter.getCount()+1);
         viewPagerTopAdapter.addView(stepKeyboardPage);
@@ -667,6 +647,7 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
      * @param customKeyView : the custom key view selected by the user
      */
     private void manageSimpleKeyAction(CustomKeyView customKeyView) {
+        Log.d(DataStore.TAG,"customKeyView.getModelKey().getKeyLanguages().get(DataStore.getInstance().getKeyboardConfiguration().getSelectedLanguage()) => "+customKeyView.getModelKey().getKeyLanguages().get(DataStore.getInstance().getKeyboardConfiguration().getSelectedLanguage()));
         getCurrentInputConnection().commitText(
                 customKeyView.getModelKey().getKeyLanguages().get(DataStore.getInstance().getKeyboardConfiguration().getSelectedLanguage()),
                 customKeyView.getModelKey().getKeyLanguages().get(DataStore.getInstance().getKeyboardConfiguration().getSelectedLanguage()).length()
