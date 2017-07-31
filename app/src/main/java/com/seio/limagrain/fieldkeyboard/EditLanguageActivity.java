@@ -457,6 +457,8 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
                 for(int i=0;i<DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().size();i++){
                     DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().get(i).setKeyAction((String)keyActionAdapter.getListSpinnerItem().get(i).getSelectedItem());
                     DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().get(i).setKeyIcon(keyIconAdapter.getListIconSpinnerItem().get(i).getSelectedItemPosition());
+                    // TODO
+                    DataStore.getInstance().getTmpKeyboardConfiguration().getModelTopKeys().get(i).setKeyFrontSize(DataStore.DEFAULT_KEY_ICON_SIZE);
                 }
             }
             DataStore.getInstance().setKeyboardConfiguration(DataStore.getInstance().getTmpKeyboardConfiguration());

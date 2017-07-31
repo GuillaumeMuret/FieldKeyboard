@@ -660,9 +660,6 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
         viewPagerTop.setOffscreenPageLimit(viewPagerTopAdapter.getCount()+1);
         viewPagerTopAdapter.addView(stepKeyboardPage);
         viewPagerTopAdapter.notifyDataSetChanged();
-
-        // TODO remove cause it's just for the bottom
-        // TODO -> tvCurrentPage.setText(viewPagerTop.getCurrentItem()+1+"/"+ viewPagerTopAdapter.getCount());
     }
 
     /**
