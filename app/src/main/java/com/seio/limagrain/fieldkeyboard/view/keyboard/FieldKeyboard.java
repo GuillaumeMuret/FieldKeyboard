@@ -913,6 +913,7 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
             if(currentItemPageTop< viewPagerTopAdapter.getCount()){
                 viewPagerTop.setCurrentItem(currentItemPageTop);
             }
+
             saveKeyboardConfiguration();
         }else{
             Toast.makeText(this,getResources().getString(R.string.error_message_cannot_delete_when_app_edition_opened),Toast.LENGTH_SHORT).show();
