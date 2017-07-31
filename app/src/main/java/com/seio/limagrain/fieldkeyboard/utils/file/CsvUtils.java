@@ -67,7 +67,7 @@ public class CsvUtils {
         ArrayList<String[]> stringCsvFile = new ArrayList<>();
         BufferedReader br = null;
         String line;
-        String cvsSplitBy = ";";
+        String cvsSplitBy = ",";
         try {
             br = new BufferedReader(new FileReader(keyboardConfigFile));
             while ((line = br.readLine()) != null) {
@@ -365,10 +365,10 @@ public class CsvUtils {
                 String lineToWrite = "";
                 if (stringCsvFile.get(i).length > 0) {
                     for (int j = 0; j < stringCsvFile.get(i).length; j++) {
-                        lineToWrite += stringCsvFile.get(i)[j] + ";";
+                        lineToWrite += stringCsvFile.get(i)[j] + ",";
                     }
                 } else {
-                    lineToWrite = ";";
+                    lineToWrite = ",";
                 }
                 lineToWrite += "\r\n";
                 writer.append(lineToWrite);

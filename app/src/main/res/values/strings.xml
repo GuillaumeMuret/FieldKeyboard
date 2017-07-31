@@ -56,6 +56,7 @@
     <string name="error_message_empty_field">You have to fill the empty field…</string>
     <string name="error_message_empty_field_add_word">You cannot add empty word…</string>
     <string name="error_message_not_integer">A field is not an integer…</string>
+    <string name="error_message_cannot_delete_when_app_edition_opened">Cannot delete when edition app opened…</string>
 
     <!-- KEYBOARD -->
     <!-- Action bar -->

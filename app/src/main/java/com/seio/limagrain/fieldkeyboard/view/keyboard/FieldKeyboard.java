@@ -888,32 +888,35 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
      * Called when the user want to remove selected items
      */
     private void removeSelectedItems(){
-
-        for(int i = 0; i<DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().size(); i++) {
-            if(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).isKeySelected()){
-                DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().remove(i);
-                i--;
+        if(!EditLanguageActivity.isActivityAlive){
+            for(int i = 0; i<DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().size(); i++) {
+                if(DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().get(i).isKeySelected()){
+                    DataStore.getInstance().getKeyboardConfiguration().getModelBottomKeys().remove(i);
+                    i--;
+                }
             }
-        }
 
-        for(int i = 0; i<DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().size(); i++) {
-            if(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).isKeySelected()){
-                DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().remove(i);
-                i--;
+            for(int i = 0; i<DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().size(); i++) {
+                if(DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().get(i).isKeySelected()){
+                    DataStore.getInstance().getKeyboardConfiguration().getModelTopKeys().remove(i);
+                    i--;
+                }
             }
-        }
 
-        switchModeNormal();
-        int currentItemPageBottom = viewPagerBottom.getCurrentItem();
-        int currentItemPageTop = viewPagerTop.getCurrentItem();
-        applyKeyboardConfiguration();
-        if(currentItemPageBottom< viewPagerBottomAdapter.getCount()){
-            viewPagerBottom.setCurrentItem(currentItemPageBottom);
+            switchModeNormal();
+            int currentItemPageBottom = viewPagerBottom.getCurrentItem();
+            int currentItemPageTop = viewPagerTop.getCurrentItem();
+            applyKeyboardConfiguration();
+            if(currentItemPageBottom< viewPagerBottomAdapter.getCount()){
+                viewPagerBottom.setCurrentItem(currentItemPageBottom);
+            }
+            if(currentItemPageTop< viewPagerTopAdapter.getCount()){
+                viewPagerTop.setCurrentItem(currentItemPageTop);
+            }
+            saveKeyboardConfiguration();
+        }else{
+            Toast.makeText(this,getResources().getString(R.string.error_message_cannot_delete_when_app_edition_opened),Toast.LENGTH_SHORT).show();
         }
-        if(currentItemPageTop< viewPagerTopAdapter.getCount()){
-            viewPagerTop.setCurrentItem(currentItemPageTop);
-        }
-        saveKeyboardConfiguration();
     }
 
     /**
