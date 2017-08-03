@@ -30,7 +30,7 @@
                 android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                 android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                 android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                android:background="@drawable/selector_attach_keyboard"
+                android:background="@drawable/selector_keyboard_button"
                 android:padding="@dimen/keyboard_app_bar_button_padding"
                 android:src="@drawable/ic_close_help_action_bar" />
 
@@ -64,7 +64,7 @@
                 android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                 android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                 android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                android:background="@drawable/selector_attach_keyboard"
+                android:background="@drawable/selector_keyboard_button"
                 android:padding="@dimen/keyboard_app_bar_button_padding"
                 android:src="@drawable/ic_close_help_action_bar" />
 
@@ -106,7 +106,7 @@
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                    android:background="@drawable/selector_attach_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
                     android:src="@drawable/ic_close_help_action_bar" />
 
@@ -116,7 +116,7 @@
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                    android:background="@drawable/selector_attach_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
                     android:src="@drawable/ic_delete_items" />
 
@@ -126,7 +126,7 @@
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                    android:background="@drawable/selector_attach_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
                     android:src="@drawable/ic_mode_moving" />
 
@@ -136,7 +136,7 @@
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                    android:background="@drawable/selector_attach_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
                     android:src="@drawable/ic_edit_background_color" />
 
@@ -146,7 +146,7 @@
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                    android:background="@drawable/selector_attach_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
                     android:src="@drawable/ic_edit_font_color" />
 
@@ -156,7 +156,7 @@
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                    android:background="@drawable/selector_attach_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
                     android:src="@drawable/ic_set_key_size" />
 
@@ -166,7 +166,7 @@
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                    android:background="@drawable/selector_attach_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
                     android:src="@drawable/ic_select_all" />
 
@@ -176,7 +176,7 @@
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                    android:background="@drawable/selector_attach_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
                     android:src="@drawable/ic_edit_language" />
 
@@ -208,7 +208,7 @@
                 android:layout_width="@dimen/keyboard_app_bar_icon_size_with_padding"
                 android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                 android:padding="@dimen/keyboard_app_bar_button_padding"
-                android:background="@drawable/selector_attach_keyboard"
+                android:background="@drawable/selector_keyboard_button"
                 android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                 android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
                 android:src="@drawable/ic_choose_keyboard"
@@ -233,7 +233,7 @@
                     android:layout_width="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
-                    android:background="@drawable/selector_change_page_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
                     android:src="@drawable/ic_arrow_left"
@@ -254,15 +254,13 @@
                     android:layout_width="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                     android:padding="@dimen/keyboard_app_bar_button_padding"
-                    android:background="@drawable/selector_change_page_keyboard"
+                    android:background="@drawable/selector_keyboard_button"
                     android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                     android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
                     android:src="@drawable/ic_arrow_right"
                     />
 
             </LinearLayout>
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -276,7 +274,7 @@
                 android:layout_width="@dimen/keyboard_app_bar_icon_size_with_padding"
                 android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                 android:padding="@dimen/keyboard_app_bar_button_padding"
-                android:background="@drawable/selector_attach_keyboard"
+                android:background="@drawable/selector_keyboard_button"
                 android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                 android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
                 android:src="@drawable/ic_settings"
@@ -287,7 +285,7 @@
                 android:layout_width="@dimen/keyboard_app_bar_icon_size_with_padding"
                 android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                 android:padding="@dimen/keyboard_app_bar_button_padding"
-                android:background="@drawable/selector_attach_keyboard"
+                android:background="@drawable/selector_keyboard_button"
                 android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                 android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
                 android:src="@drawable/ic_attach_keyboard"

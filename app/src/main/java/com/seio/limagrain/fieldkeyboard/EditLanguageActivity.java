@@ -162,14 +162,14 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         ImageView iconRemoveLanguage = new ImageView(this);
         iconRemoveLanguage.setImageResource(R.drawable.ic_remove_language);
         iconRemoveLanguage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)this.getResources().getDimension(R.dimen.activity_edit_language_icon_size)));
-        iconRemoveLanguage.setBackground(getResources().getDrawable(R.drawable.selector_attach_keyboard));
+        iconRemoveLanguage.setBackground(getResources().getDrawable(R.drawable.selector_keyboard_button));
         iconRemoveLanguage.setVisibility(View.INVISIBLE);
 
         // Init icon add word
         ImageView iconAddWord = new ImageView(this);
         iconAddWord.setImageResource(R.drawable.ic_add);
         iconAddWord.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)this.getResources().getDimension(R.dimen.activity_edit_language_icon_size)));
-        iconAddWord.setBackground(getResources().getDrawable(R.drawable.selector_attach_keyboard));
+        iconAddWord.setBackground(getResources().getDrawable(R.drawable.selector_keyboard_button));
         iconAddWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,7 +228,7 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         ImageView iconRemoveLanguage = new ImageView(this);
         iconRemoveLanguage.setImageResource(R.drawable.ic_remove_language);
         iconRemoveLanguage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)this.getResources().getDimension(R.dimen.activity_edit_language_icon_size)));
-        iconRemoveLanguage.setBackground(getResources().getDrawable(R.drawable.selector_attach_keyboard));
+        iconRemoveLanguage.setBackground(getResources().getDrawable(R.drawable.selector_keyboard_button));
         iconRemoveLanguage.setVisibility(View.INVISIBLE);
 
         // Init layout for the title and content
@@ -288,7 +288,7 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
         ImageView iconRemoveLanguage = new ImageView(this);
         iconRemoveLanguage.setImageResource(R.drawable.ic_remove_language);
         iconRemoveLanguage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)this.getResources().getDimension(R.dimen.activity_edit_language_icon_size)));
-        iconRemoveLanguage.setBackground(getResources().getDrawable(R.drawable.selector_attach_keyboard));
+        iconRemoveLanguage.setBackground(getResources().getDrawable(R.drawable.selector_keyboard_button));
         iconRemoveLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -392,12 +392,44 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
      */
     private void removeLanguage(int position){
         if(position>0){
-            DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().remove(position);
+            displayDialogSaveBeforeDeletingLanguage(position);
         }else{
             Toast.makeText(this,getResources().getString(R.string.error_cannot_remove_default_language),Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void removeTheLanguage(final int position){
+        DataStore.getInstance().getTmpKeyboardConfiguration().getKeyboardLanguages().remove(position);
         llLanguageLayout.removeAllViews();
+
+        initLayoutAction();
+        initLayoutIcon();
         initLayoutLanguage();
+    }
+
+    private void displayDialogSaveBeforeDeletingLanguage(final int position){
+        new MaterialDialog.Builder(this)
+                .title(R.string.edit_language_dialog_save_all_keys_before_removing_title)
+                .content(R.string.edit_language_dialog_save_all_keys_before_removing_content)
+                .cancelable(true)
+                .theme(Theme.LIGHT)
+                .negativeText(R.string.dialog_no)
+                .positiveText(R.string.dialog_yes)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        saveKeyboardConfiguration();
+                        removeTheLanguage(position);
+
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        removeTheLanguage(position);
+                    }
+                })
+                .show();
     }
 
     /**

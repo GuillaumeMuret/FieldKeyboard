@@ -37,7 +37,7 @@
                         android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                         android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                         android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                        android:background="@drawable/selector_attach_keyboard"
+                        android:background="@drawable/selector_keyboard_button"
                         android:padding="@dimen/keyboard_app_bar_button_padding"
                         android:src="@drawable/ic_save" />
 
@@ -100,7 +100,7 @@
                         android:layout_height="@dimen/keyboard_app_bar_icon_size_with_padding"
                         android:layout_marginLeft="@dimen/keyboard_help_app_bar_button_margin"
                         android:layout_marginRight="@dimen/keyboard_help_app_bar_button_margin"
-                        android:background="@drawable/selector_attach_keyboard"
+                        android:background="@drawable/selector_keyboard_button"
                         android:padding="@dimen/keyboard_app_bar_button_padding"
                         android:src="@drawable/ic_add" />
 

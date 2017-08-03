@@ -29,7 +29,6 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Vibrator;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -856,7 +855,7 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
             tvLanguage.setText(DataStore.getInstance().getKeyboardConfiguration().getKeyboardLanguages().get(i));
             tvLanguage.setTextSize( (int) getResources().getDimension(R.dimen.keyboard_help_bar_language_text_size));
             tvLanguage.setTextColor(this.getResources().getColor(R.color.colorBlack));
-            tvLanguage.setBackground(this.getResources().getDrawable(R.drawable.selector_attach_keyboard));
+            tvLanguage.setBackground(this.getResources().getDrawable(R.drawable.selector_keyboard_button));
             tvLanguage.setLayoutParams(params);
             tvLanguage.setPadding(paddingMargin,paddingMargin,paddingMargin,paddingMargin);
             final int ii = i;
