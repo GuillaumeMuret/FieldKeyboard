@@ -26,6 +26,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -79,6 +80,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        DataStore.getInstance().setApplicationContext(this);
 
         // Set Layout
         setContentView(R.layout.activity_home);
@@ -245,7 +248,8 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void initCustomKeyboard(){
         if(PermissionUtils.checkStoragePermissions(this)) {
-            FileUtils.loadKeyboardConfiguration();
+            Log.d(DataStore.TAG,"checkStoragePermissions");
+            FileUtils.loadKeyboardConfiguration(getApplicationContext());
             etBottomSizeKeyboard.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardHeight()));
             etBottomNbLine.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine()));
             etBottomNbRow.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbRow()));
@@ -253,6 +257,8 @@ public class HomeActivity extends AppCompatActivity {
             etTopSizeKeyboard.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardHeight()));
             etTopNbLine.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbLine()));
             etTopNbRow.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbRow()));
+        }else{
+            Log.e(DataStore.TAG,"C'est la HESS");
         }
     }
 

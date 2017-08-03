@@ -20,6 +20,8 @@
  */
 package com.seio.limagrain.fieldkeyboard.model;
 
+import android.content.Context;
+
 import com.seio.limagrain.fieldkeyboard.view.keyboard.CustomKeyView;
 import com.seio.limagrain.fieldkeyboard.view.keyboard.FieldKeyboard;
 
@@ -69,6 +71,17 @@ public class DataStore {
             }
         }
         return instance;
+    }
+
+    /** Object ==> ApplicationContext **/
+    private Context applicationContext;
+
+    public Context getApplicationContext() {
+        return applicationContext;
+    }
+
+    public void setApplicationContext(Context applicationContext) {
+        this.applicationContext = applicationContext;
     }
 
     /** Object ==> FieldKeyboard **/

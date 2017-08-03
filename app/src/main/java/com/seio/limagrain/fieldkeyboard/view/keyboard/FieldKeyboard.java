@@ -123,6 +123,7 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
 
     @Override
     public View onCreateInputView() {
+        DataStore.getInstance().setApplicationContext(this);
 
         // Keyboard
         keyboardView =                                  getLayoutInflater().inflate(R.layout.keyboard_view,null);
@@ -176,7 +177,7 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
         DataStore.getInstance().setFieldKeyboard(this);
 
         if(PermissionUtils.checkStoragePermissions(this)) {
-            FileUtils.loadKeyboardConfiguration();
+            FileUtils.loadKeyboardConfiguration(getApplicationContext());
             initCurrentMode();
             applyKeyboardConfiguration();
         }
@@ -426,8 +427,10 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
 
     @Override
     public void hideWindow() {
-        if(!btAttachKeyboard.isSelected()){
-            super.hideWindow();
+        if(btAttachKeyboard!=null) {
+            if (!btAttachKeyboard.isSelected()) {
+                super.hideWindow();
+            }
         }
     }
 

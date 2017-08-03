@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -142,12 +143,12 @@ public class ViewUtils {
 
     public static ImageView getImageFromResource(Context context,final int imageResources){
         final ImageView imageView = new ImageView(context);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+        AbsListView.LayoutParams params = new AbsListView.LayoutParams(
                 (int)context.getResources().getDimension(R.dimen.activity_edit_language_icon_size),
                 (int)context.getResources().getDimension(R.dimen.activity_edit_language_icon_size)
         );
         int margin = (int)context.getResources().getDimension(R.dimen.main_activity_dialog_icon_margin);
-        params.setMargins(margin,margin,margin,margin);
+        //params.setMargins(margin,margin,margin,margin);
         imageView.setLayoutParams(params);
         imageView.setImageResource(imageResources);
         return imageView;

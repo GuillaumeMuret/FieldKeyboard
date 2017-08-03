@@ -356,7 +356,8 @@ public class CsvUtils {
      */
     private  static void generateCsvFile(ArrayList<String[]> stringCsvFile) {
         try {
-            File keyboardConfigFile = new File(FileUtils.getRootFile(), CSV_NAME_FILE);
+            File keyboardConfigFile = new File((DataStore.getInstance().getApplicationContext().getFileStreamPath(CSV_NAME_FILE).getPath()));
+
             keyboardConfigFile.setReadable(true, false);
             keyboardConfigFile.setExecutable(true, false);
             keyboardConfigFile.setWritable(true, false);

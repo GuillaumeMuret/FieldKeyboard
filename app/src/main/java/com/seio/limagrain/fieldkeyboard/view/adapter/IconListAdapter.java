@@ -23,9 +23,9 @@ package com.seio.limagrain.fieldkeyboard.view.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 
 import com.seio.limagrain.fieldkeyboard.R;
 import com.seio.limagrain.fieldkeyboard.model.DataStore;
@@ -46,25 +46,18 @@ public class IconListAdapter extends RecyclerView.Adapter<IconListAdapter.MyWord
 
     class MyWordViewHolder extends RecyclerView.ViewHolder {
 
-        //LinearLayout llIconView;
-
         MaterialSpinner spIcon;
 
-
-        MyWordViewHolder(View view) {
+        MyWordViewHolder(LinearLayout view) {
             super(view);
 
             spIcon =      (MaterialSpinner)   view.findViewById(R.id.spIcon);
 
             // Initializing a Array
-            ArrayAdapter<Integer> iconAdapter = new IconSpinnerArrayAdapter(context,R.layout.spinner_item,ViewUtils.getIconResourcesList());
+            ArrayAdapter<Integer> iconAdapter = new IconSpinnerArrayAdapter(context,R.layout.spinner_image_view_item,ViewUtils.getIconResourcesList());
 
             iconAdapter.setDropDownViewResource(R.layout.spinner_icon_dropdown_item);
             spIcon.setAdapter(iconAdapter);
-
-            //llIconView =    (LinearLayout)      view.findViewById(R.id.llIconView);
-            //ViewUtils.initParamIconView(llIconView);
-
         }
     }
 
@@ -76,8 +69,8 @@ public class IconListAdapter extends RecyclerView.Adapter<IconListAdapter.MyWord
 
     @Override
     public MyWordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView;
-        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_key_icon, parent, false);
+        LinearLayout itemView;
+        itemView = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_key_icon, parent, false);
         return new MyWordViewHolder(itemView);
     }
 

@@ -62,7 +62,7 @@ public class ActionListAdapter extends RecyclerView.Adapter<ActionListAdapter.My
             // Initializing a String Array
             String[] actions = context.getResources().getStringArray(R.array.item_actions_array);
             final List<String> actionsList = new ArrayList<>(Arrays.asList(actions));
-            ArrayAdapter<String> actionAdapter = new ActionSpinnerArrayAdapter(context,R.layout.spinner_item,actionsList);
+            ArrayAdapter<String> actionAdapter = new ActionSpinnerArrayAdapter(context,R.layout.spinner_text_view_item,actionsList);
 
             actionAdapter.setDropDownViewResource(R.layout.spinner_action_dropdown_item);
             spAction.setAdapter(actionAdapter);

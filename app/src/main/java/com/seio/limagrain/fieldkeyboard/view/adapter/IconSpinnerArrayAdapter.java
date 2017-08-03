@@ -24,8 +24,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.seio.limagrain.fieldkeyboard.R;
 import com.seio.limagrain.fieldkeyboard.utils.ViewUtils;
@@ -60,8 +62,12 @@ public class IconSpinnerArrayAdapter extends ArrayAdapter<Integer> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //return super.getView(position, convertView, parent);
-        convertView = ViewUtils.getImageFromResource(context,listIconResourcesView.get(position));
-        return convertView;
+        return getImageForPosition(position);
+    }
+
+    private View getImageForPosition(int position) {
+        ImageView imageView = ViewUtils.getImageFromResource(context,listIconResourcesView.get(position));
+        return imageView;
     }
 
     @Override

@@ -82,6 +82,7 @@ public class EditLanguageActivity extends AppCompatActivity implements IRemoveIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DataStore.getInstance().setApplicationContext(this);
 
         keyType = getIntent().getStringExtra(DataStore.KEY_TYPE);
 

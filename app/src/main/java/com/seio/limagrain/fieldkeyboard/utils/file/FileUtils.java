@@ -54,7 +54,6 @@ import jxl.WorkbookSettings;
 public class FileUtils {
 
     // The different name of the files and directory
-    private static final String NAME_DIRECTORY = "CustomKeyboardConfig";
     private static final String JSON_NAME_FILE = "CustomKeyboardConfig.json";
 
     /**
@@ -69,14 +68,16 @@ public class FileUtils {
         String jsonInString = gson.toJson(DataStore.getInstance().getKeyboardConfiguration());
 
         try {
-            File keyboardConfigFile = new File(getRootFile(), JSON_NAME_FILE);
+            File keyboardConfigFile = new File((DataStore.getInstance().getApplicationContext().getFileStreamPath(JSON_NAME_FILE).getPath()));
+
             FileWriter writer = new FileWriter(keyboardConfigFile);
 
             writer.append(jsonInString);
             writer.flush();
             writer.close();
+            Log.e(DataStore.TAG,"SAVE GOOD => "+keyboardConfigFile);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(DataStore.TAG,"EXCEPTION SAVE => ",e);
         }
     }
 
@@ -121,9 +122,11 @@ public class FileUtils {
             || keyboardConfiguration.getModelBottomKeys()==null
             || keyboardConfiguration.getModelTopKeys()==null
                 ) {
+            Log.e(DataStore.TAG,"keyboardConfiguration.getKeyboardLanguages()==null || keyboardConfiguration.getModelBottomKeys()==null || keyboardConfiguration.getModelTopKeys()==null");
             reinitKeyboard();
         }else{
             if(isErrorKeyboard(keyboardConfiguration)) {
+                Log.e(DataStore.TAG,"isErrorKeyboard");
                 reinitKeyboard();
             }
         }
@@ -136,22 +139,17 @@ public class FileUtils {
      */
     public static void overwriteCurrentKeyboardConfiguration(Context context, Uri uri){
         String path = getPath(context, uri);
-        //try {
-            // Get the file instance
-            File keyboardConfigFile = new File(path);
-            switch(getFileExtension(path)){
-                case "json":
-                    manageKeyboardConfigurationFileJSON(keyboardConfigFile);
-                    break;
+        File keyboardConfigFile = new File(path);
+        switch(getFileExtension(path)){
+            case "json":
+                manageKeyboardConfigurationFileJSON(keyboardConfigFile);
+                break;
 
-                case "csv":
-                case "txt":
-                    CsvUtils.manageKeyboardConfigurationFileCSV(keyboardConfigFile);
-                    break;
-            }
-        /*} catch(Exception e){
-            reinitKeyboard();
-        }*/
+            case "csv":
+            case "txt":
+                CsvUtils.manageKeyboardConfigurationFileCSV(keyboardConfigFile);
+                break;
+        }
     }
 
     /**
@@ -163,13 +161,17 @@ public class FileUtils {
         try {
             DataStore.getInstance().setKeyboardConfiguration(gson.fromJson(new FileReader(keyboardConfigFile), KeyboardConfiguration.class));
             if(DataStore.getInstance().getKeyboardConfiguration()==null){
+                Log.e(DataStore.TAG,"DataStore.getInstance().getKeyboardConfiguration()==null");
                 reinitKeyboard();
             }else{
+                Log.d(DataStore.TAG,"manageDataActualization");
                 manageDataActualization(DataStore.getInstance().getKeyboardConfiguration());
             }
         } catch (FileNotFoundException e) {
+            Log.e(DataStore.TAG,"FileNotFoundException ",e);
             reinitKeyboard();
         } catch(Exception e){
+            Log.e(DataStore.TAG,"Exception ",e);
             reinitKeyboard();
         }
     }
@@ -177,21 +179,9 @@ public class FileUtils {
     /**
      * Process called to load the current json keyboard configuration file
      */
-    public static void loadKeyboardConfiguration(){
-        File keyboardConfigFile = new File(getRootFile(), JSON_NAME_FILE);
+    public static void loadKeyboardConfiguration(Context context){
+        File keyboardConfigFile = new File((context.getFileStreamPath(JSON_NAME_FILE).getPath()));
         manageKeyboardConfigurationFileJSON(keyboardConfigFile);
-    }
-
-    /**
-     * Process called to get the root file
-     * @return : the root file
-     */
-    static File getRootFile(){
-        File root = new File(Environment.getExternalStorageDirectory(), NAME_DIRECTORY);
-        if (!root.exists()) {
-            root.mkdirs();
-        }
-        return root;
     }
 
     /**
