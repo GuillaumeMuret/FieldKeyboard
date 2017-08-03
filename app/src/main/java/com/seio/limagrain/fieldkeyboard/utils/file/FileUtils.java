@@ -67,13 +67,13 @@ public class FileUtils {
     }
 
     private static void saveInEnvironmentData(){
-        CsvUtils.exportCsvFile(new File((DataStore.getInstance().getApplicationContext().getFileStreamPath(CsvUtils.CSV_NAME_FILE).getPath())));
         exportJsonFile(new File((DataStore.getInstance().getApplicationContext().getFileStreamPath(JSON_NAME_FILE).getPath())));
+        CsvUtils.exportCsvFile(new File((DataStore.getInstance().getApplicationContext().getFileStreamPath(CsvUtils.CSV_NAME_FILE)).getPath()));
     }
 
     private static void saveInCustomKeyboardConfigDirectoryInLocal(){
-        CsvUtils.exportCsvFile(new File(FileUtils.getRootFile(), CsvUtils.CSV_NAME_FILE));
         exportJsonFile(new File(FileUtils.getRootFile(), JSON_NAME_FILE));
+        CsvUtils.exportCsvFile(new File(FileUtils.getRootFile(), CsvUtils.CSV_NAME_FILE));
     }
 
     private static void exportJsonFile(File keyboardConfigFile){

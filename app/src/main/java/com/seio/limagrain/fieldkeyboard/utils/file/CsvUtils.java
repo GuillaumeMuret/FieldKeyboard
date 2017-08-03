@@ -21,6 +21,7 @@
 package com.seio.limagrain.fieldkeyboard.utils.file;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.seio.limagrain.fieldkeyboard.model.DataStore;
 import com.seio.limagrain.fieldkeyboard.model.KeyboardConfiguration;
@@ -374,8 +375,9 @@ public class CsvUtils {
             }
             writer.flush();
             writer.close();
+            Log.d(DataStore.TAG,"SAVE GOOD in => "+keyboardConfigFile);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(DataStore.TAG,"ERROR",e);
         }
     }
 }
