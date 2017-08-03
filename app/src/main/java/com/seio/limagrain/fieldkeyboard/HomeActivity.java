@@ -248,7 +248,6 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void initCustomKeyboard(){
         if(PermissionUtils.checkStoragePermissions(this)) {
-            Log.d(DataStore.TAG,"checkStoragePermissions");
             FileUtils.loadKeyboardConfiguration(getApplicationContext());
             etBottomSizeKeyboard.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardHeight()));
             etBottomNbLine.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getBottomKeyboardNbLine()));
@@ -257,8 +256,6 @@ public class HomeActivity extends AppCompatActivity {
             etTopSizeKeyboard.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardHeight()));
             etTopNbLine.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbLine()));
             etTopNbRow.setText(String.valueOf(DataStore.getInstance().getKeyboardConfiguration().getTopKeyboardNbRow()));
-        }else{
-            Log.e(DataStore.TAG,"C'est la HESS");
         }
     }
 

@@ -40,7 +40,7 @@ public class CsvUtils {
     private static final int CSV_FILE_KEYS_LANGUAGE_NAME_POSITION = 5;
 
     // The CSV file name
-    private static final String CSV_NAME_FILE = "CustomKeyboardConfig.csv";
+    public static final String CSV_NAME_FILE = "CustomKeyboardConfig.csv";
 
     // The key of the CSV file
     private static final String KEY_KEYBOARD_CONFIGURATION  = "KeyboardConfiguration";
@@ -241,7 +241,7 @@ public class CsvUtils {
     /**
      * Process called to export Csv file in the CustomKeyboardConfig directory
      */
-    static void exportCsvFile() {
+    static void exportCsvFile(File keyboardConfigFile) {
         ArrayList<String[]> stringCsvFile = new ArrayList<>();
 
         // Keyboard configuration
@@ -254,7 +254,7 @@ public class CsvUtils {
         stringCsvFile = manageExportTopKeyboardKeys(stringCsvFile);
 
         // Export file
-        generateCsvFile(stringCsvFile);
+        generateCsvFile(keyboardConfigFile,stringCsvFile);
     }
 
     /**
@@ -354,10 +354,8 @@ public class CsvUtils {
      * Manage the generation of the KeyboardConfiguration paragraph of the CSV file
      * @param stringCsvFile : the ArrayList of the file line by line
      */
-    private  static void generateCsvFile(ArrayList<String[]> stringCsvFile) {
+    private  static void generateCsvFile(File keyboardConfigFile,ArrayList<String[]> stringCsvFile) {
         try {
-            File keyboardConfigFile = new File((DataStore.getInstance().getApplicationContext().getFileStreamPath(CSV_NAME_FILE).getPath()));
-
             keyboardConfigFile.setReadable(true, false);
             keyboardConfigFile.setExecutable(true, false);
             keyboardConfigFile.setWritable(true, false);
