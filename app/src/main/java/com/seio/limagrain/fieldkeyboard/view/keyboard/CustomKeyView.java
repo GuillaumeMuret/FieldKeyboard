@@ -80,6 +80,7 @@ public class CustomKeyView extends LinearLayout {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
                 myKeyInterface.onKeyPressed((CustomKeyView)v);
             }
         });
@@ -87,6 +88,7 @@ public class CustomKeyView extends LinearLayout {
         this.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
                 myKeyInterface.onKeyLongPressed((CustomKeyView)v);
                 return false;
             }

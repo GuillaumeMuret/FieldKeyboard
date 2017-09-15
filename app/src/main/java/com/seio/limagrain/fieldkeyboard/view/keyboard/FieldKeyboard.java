@@ -28,12 +28,14 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Vibrator;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -120,6 +122,9 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
     private View btColorPickerOK;
     private View btColorPickerCancel;
 
+    // Media player for playing sounds
+    private MediaPlayer mediaPlayer;
+
     @Override
     public View onCreateInputView() {
         DataStore.getInstance().setApplicationContext(this);
@@ -146,7 +151,7 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
         // Top keyboard
         llKeyboardTopSize =      (LinearLayout)            keyboardView.findViewById(R.id.llKeyboardTopSize);
         resizeBarTop =                                     keyboardView.findViewById(R.id.resizeBarTop);
-        viewPagerTop =             (ViewPager)       keyboardView.findViewById(R.id.viewpagerTop);
+        viewPagerTop =             (ViewPager)          keyboardView.findViewById(R.id.viewpagerTop);
 
         // Bottom keyboard
         llKeyboardBottomSize =      (LinearLayout)            keyboardView.findViewById(R.id.llKeyboardBottomSize);
@@ -734,8 +739,9 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         switch (am.getRingerMode()) {
             case AudioManager.RINGER_MODE_NORMAL:
-                MediaPlayer player = MediaPlayer.create(this, R.raw.raw_item_click);
-                player.start();
+                stopPlaying();
+                mediaPlayer = MediaPlayer.create(this, R.raw.raw_item_click);
+                mediaPlayer.start();
                 v.vibrate(50);
                 break;
             case AudioManager.RINGER_MODE_SILENT:
@@ -763,6 +769,14 @@ public class FieldKeyboard extends InputMethodService implements IKeyInterface {
                     }
                 }
                 break;
+        }
+    }
+
+    private void stopPlaying() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
 
